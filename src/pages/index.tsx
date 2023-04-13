@@ -1,14 +1,25 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import ProductList from '@/components/product-list'
-import Layout from '@/components/layout/layout'
+import ProductList from "@/components/product-list";
+import Layout from "@/components/layout/layout";
 
-const inter = Inter({ subsets: ['latin'] })
+import { FC, PropsWithChildren } from "react";
+import { Product } from "./api/products";
 
-export default function Home() {
+export async function getStaticProps() {
+  const productsResponse = await fetch("http://localhost:3000/api/products");
+  const formattedProducts = await productsResponse.json();
+  return {
+    props: {
+      products: formattedProducts,
+    },
+  };
+}
+
+const Home: FC<PropsWithChildren<{ products: Product[] }>> = ({ products }) => {
   return (
     <Layout>
-      <ProductList />
+      <ProductList products={products} />
     </Layout>
-  )
-}
+  );
+};
+
+export default Home;

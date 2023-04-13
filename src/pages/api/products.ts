@@ -8,6 +8,7 @@ export type Product = {
   price: number;
   tags: string[];
   stock: number;
+  slug: string;
   allowBackorder?: boolean;
 };
 
@@ -19,5 +20,7 @@ export default async function handler(
     content_type: "product",
   });
 
-  res.status(200).json(products.items.map(({ fields }) => fields) as Product[]);
+  res
+    .status(200)
+    .json(products.items.map(({ fields }) => fields) as unknown as Product[]);
 }

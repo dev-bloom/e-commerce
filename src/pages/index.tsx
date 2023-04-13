@@ -1,7 +1,7 @@
 import ProductList from "@/components/product-list";
 import Layout from "@/components/layout/layout";
 
-import { FC, PropsWithChildren, useEffect } from "react";
+import { FC, PropsWithChildren } from "react";
 import { Product } from "./api/products";
 
 export async function getStaticProps() {

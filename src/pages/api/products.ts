@@ -10,6 +10,8 @@ export type Product = {
   stock: number;
   slug: string;
   allowBackorder?: boolean;
+  discountPercent?: number;
+  gallery?: string[]
 };
 
 export default async function handler(

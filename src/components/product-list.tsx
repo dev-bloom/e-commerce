@@ -6,7 +6,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Avatar, Card, Row, Col } from "antd";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 
 export default function ProductList({
   products,

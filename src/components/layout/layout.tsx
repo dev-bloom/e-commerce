@@ -1,14 +1,12 @@
-import { Layout, Input } from "antd";
+import { Layout as ANTDLayout, Input } from "antd";
 import styles from "./layout.module.scss";
+import { FC } from "react";
+import { PropsWithChildren } from "react";
 
-const { Search } = Input;
-
-const { Header, Content, Footer } = Layout;
-
-export default function Container({ children }: any) {
+const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
-    <Layout>
-      <Header
+    <ANTDLayout>
+      <ANTDLayout.Header
         style={{
           position: "sticky",
           top: 0,
@@ -19,14 +17,16 @@ export default function Container({ children }: any) {
         className={styles.layoutHeader}
       >
         Piston Wraps
-        <Search placeholder="Buscar productos" style={{ width: 200 }} />
-      </Header>
-      <Content className="site-layout" style={{ padding: "0 50px" }}>
+        <Input.Search placeholder="input search text" style={{ width: 200 }} />
+      </ANTDLayout.Header>
+      <ANTDLayout.Content className="site-layout" style={{ padding: "0 50px" }}>
         <div style={{ padding: 24, minHeight: 380 }}>{children}</div>
-      </Content>
-      <Footer style={{ textAlign: "center" }}>
+      </ANTDLayout.Content>
+      <ANTDLayout.Footer style={{ textAlign: "center" }}>
         Ant Design ©2023 Created by Ant UED
-      </Footer>
-    </Layout>
+      </ANTDLayout.Footer>
+    </ANTDLayout>
   );
-}
+};
+
+export default Layout;

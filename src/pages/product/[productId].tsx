@@ -11,12 +11,13 @@ import logo from "../../../public/logo.png";
 import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
 import { Product } from "../api/products";
 import Link from "next/link";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 export async function getStaticPaths() {
   const productsResponse = await fetch("http://localhost:3000/api/products");
-  const formattedProducts = await productsResponse.json();
+  const formattedProducts: Product[] = await productsResponse.json();
   const paths = formattedProducts.map((product: Product) => ({
-    params: { productId: product.slug },
+    params: { productId: product.fields.slug },
   }));
   return {
     paths,
@@ -34,7 +35,8 @@ export async function getStaticProps({
     "http://localhost:3000/api/product?" +
       new URLSearchParams({ slug: productId })
   );
-  const formattedProduct = await product.json();
+  const formattedProduct: Product = await product.json();
+
   return {
     props: {
       product: formattedProduct,
@@ -50,13 +52,15 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
-  console.debug(product);
-
   const refContainer = useRef(null);
-  const price = product.discountPercent
-    ? product.price * (1 - product.discountPercent / 100)
-    : undefined;
-  const { Meta } = Card;
+
+  console.debug(product);
+  const { fields: productFields } = product;
+  const discountPercent = productFields.discountPercent ?? 0;
+  const price =
+    product.fields.price - (product.fields.price * discountPercent) / 100;
+
+  const ProductBody = documentToReactComponents(productFields.longDescription);
 
   return (
     <>
@@ -83,7 +87,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                 touchThreshold={50}
                 focusOnSelect={true}
               >
-                {product.gallery?.map((image, i) => (
+                {productFields.gallery?.map((image, i) => (
                   <div key={i}>
                     <img
                       style={contentStyle}
@@ -98,36 +102,35 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           <Col span={10}>
             <div className={styles.carousel}>
               <Card
-                title={product.name}
+                title={productFields.name}
                 bordered={false}
                 style={{ width: 570 }}
               >
-                <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Error sint nesciunt tempora quia beatae consequuntur ratione
-                  laudantium, quis placeat tempore doloribus doloremque laborum
-                  et nobis facere magnam consequatur ex. Rem!
+                {ProductBody}
+                <p
+                  className={
+                    discountPercent ? styles.discount : styles.nodiscount
+                  }
+                >
+                  $ {productFields.price}
                 </p>
-                <p className={price ? styles.discount : styles.nodiscount}>
-                  $ {product.price}
-                </p>
-                {price && (
+                {!!discountPercent && (
                   <p className={styles.dprice}>
                     <b>$ {price}</b>
                   </p>
                 )}
-                {price && (
+                {!!discountPercent && (
                   <Tag bordered={false} color="red">
-                    {product.discountPercent}% OFF
+                    {productFields.discountPercent}% OFF
                   </Tag>
                 )}
                 <p>
-                  {product.stock
-                    ? `${product.stock} unidades disponibles`
+                  {productFields.stock
+                    ? `${productFields.stock} unidades disponibles`
                     : "No hay unidades disponibles"}
                 </p>
                 <Space size={[0, "small"]} wrap>
-                  {product.tags.map((tag, i) => {
+                  {productFields.tags.map((tag, i) => {
                     return (
                       <Tag key={i} bordered={false}>
                         {tag}
@@ -142,11 +145,11 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                   defaultValue="1"
                   style={{ width: 60 }}
                   options={[
-                    { value: "1", label: "1" },
-                    { value: "2", label: "2" },
-                    { value: "3", label: "3" },
-                    { value: "4", label: "4" },
-                    { value: "5", label: "5" },
+                    { value: 1, label: "1" },
+                    { value: 2, label: "2" },
+                    { value: 3, label: "3" },
+                    { value: 4, label: "4" },
+                    { value: 5, label: "5" },
                   ]}
                 />
                 <Button type="primary" size={"large"}>
@@ -164,7 +167,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
         <Row className={styles.rowRelated}>
           <LeftOutlined className={styles.buttons} />
           <div className={styles.related} ref={refContainer}>
-            {product.gallery?.map((card, i) => {
+            {productFields.gallery?.map((card, i) => {
               return (
                 <Card
                   key={i}
@@ -179,7 +182,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                     />
                   }
                 >
-                  <Meta
+                  <Card.Meta
                     title="Europe Street beat"
                     description="www.instagram.com"
                   />

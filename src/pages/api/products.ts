@@ -1,66 +1,44 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import contentfulClient from "@/utils/contentfulClient";
+import { Document } from "@contentful/rich-text-types";
+import { Asset, BaseEntry } from "contentful";
 
-type ContentfulImage = {
-  fields: {
-    description: string;
-    url: string;
-    file: {
-      contentType: string;
-      fileName: string;
-      url: string;
-      details: {
-        size: number;
-        image: {
-          width: number;
-          height: number;
-        };
-      };
-    };
-  };
-};
+interface ContentFulEntry<T> extends BaseEntry {
+  fields: T;
+}
 
-type ContentfulRichText = {
-  content: {
-    value: string;
-    nodeType: string;
-  }[];
-};
-
-export type Product = {
+export type ProductFields = {
   name: string;
   shortDescription: string;
-  longDescription: ContentfulRichText;
+  longDescription: Document;
   price: number;
   tags: string[];
   stock: number;
   slug: string;
   allowBackorder?: boolean;
   discountPercent?: number;
-  gallery?: ContentfulImage[];
-  relatedProducts?: {
-    fields: Product;
-    metadata: {
-      tags: string[];
-    };
-    sys: {
-      id: string;
-      type: string;
-      updatedAt: Date;
-    };
-  };
+  gallery?: Asset[];
+  relatedProducts?: ContentFulEntry<{
+    fields: ProductFields;
+    contentTypeId: "product";
+  }>[];
 };
+
+export type ProductSkeleton = {
+  fields: ProductFields;
+  contentTypeId: "product";
+};
+
+export type Product = ContentFulEntry<ProductFields>;
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Product[]>
 ) {
-  const products = await contentfulClient.getEntries({
+  const products = await contentfulClient.getEntries<ProductSkeleton>({
     content_type: "product",
     include: 1,
   });
 
-  res
-    .status(200)
-    .json(products.items.map(({ fields }) => fields) as unknown as Product[]);
+  res.status(200).json(products.items);
 }

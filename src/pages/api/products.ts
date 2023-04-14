@@ -38,6 +38,17 @@ export type Product = {
   allowBackorder?: boolean;
   discountPercent?: number;
   gallery?: ContentfulImage[];
+  relatedProducts?: {
+    fields: Product;
+    metadata: {
+      tags: string[];
+    };
+    sys: {
+      id: string;
+      type: string;
+      updatedAt: Date;
+    };
+  };
 };
 
 export default async function handler(
@@ -46,6 +57,7 @@ export default async function handler(
 ) {
   const products = await contentfulClient.getEntries({
     content_type: "product",
+    include: 1,
   });
 
   res

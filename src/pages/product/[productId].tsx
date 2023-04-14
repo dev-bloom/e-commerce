@@ -57,7 +57,6 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     ? product.price * (1 - product.discountPercent / 100)
     : undefined;
   const { Meta } = Card;
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
     <>
@@ -88,7 +87,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                   <div key={i}>
                     <img
                       style={contentStyle}
-                      src={`https:${image.fields.file.url}`}
+                      src={`https:${image.fields?.file?.url}`}
                       alt="product"
                     />
                   </div>

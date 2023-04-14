@@ -9,6 +9,7 @@ export default async function handler(
   const products = await contentfulClient.getEntries({
     content_type: "product",
     "fields.slug": req.query.slug,
+    include: 1,
   });
 
   res.status(200).json(products.items[0].fields as unknown as Product);

@@ -1,17 +1,43 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import contentfulClient from "@/utils/contentfulClient";
 
+type ContentfulImage = {
+  fields: {
+    description: string;
+    url: string;
+    file: {
+      contentType: string;
+      fileName: string;
+      url: string;
+      details: {
+        size: number;
+        image: {
+          width: number;
+          height: number;
+        };
+      };
+    };
+  };
+};
+
+type ContentfulRichText = {
+  content: {
+    value: string;
+    nodeType: string;
+  }[];
+};
+
 export type Product = {
   name: string;
   shortDescription: string;
-  longDescription: string;
+  longDescription: ContentfulRichText;
   price: number;
   tags: string[];
   stock: number;
   slug: string;
   allowBackorder?: boolean;
   discountPercent?: number;
-  gallery?: string[]
+  gallery?: ContentfulImage[];
 };
 
 export default async function handler(

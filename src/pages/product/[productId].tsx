@@ -1,17 +1,23 @@
-import React, { PropsWithChildren, useRef } from "react";
-import styles from "./product.module.scss";
+import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import {
-  GlobalOutlined,
   ShoppingCartOutlined,
   LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import Image from "next/image";
-import logo from "../../../public/logo.png";
-import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
-import { Product } from "../api/products";
-import Link from "next/link";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Product } from "@/pages/api/products";
+import {
+  addItem,
+  removeItem,
+  selectIsProductInCart,
+  selectProductCountForSlug,
+} from "@/store/cart";
+import Layout from "@/components/layout/layout";
+import styles from "./product.module.scss";
+import { getImageURLFromAsset } from "@/utils/helpers";
+import { BaseOptionType } from "antd/es/select";
 
 export async function getStaticPaths() {
   const productsResponse = await fetch("http://localhost:3000/api/products");
@@ -53,45 +59,62 @@ const contentStyle: React.CSSProperties = {
 
 const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
   const refContainer = useRef(null);
-
-  console.debug(product);
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+  const productCount = useSelector(
+    selectProductCountForSlug(product.fields.slug)
+  );
+  const isProductInCart = useSelector(
+    selectIsProductInCart(product.fields.slug)
+  );
   const { fields: productFields } = product;
   const discountPercent = productFields.discountPercent ?? 0;
   const price =
     product.fields.price - (product.fields.price * discountPercent) / 100;
-
   const ProductBody = documentToReactComponents(productFields.longDescription);
 
-  return (
-    <>
-      <nav className={styles.nav}>
-        <Link href={`/`}>
-          <Image alt="logo" src={logo} width={120} height={60} />
-        </Link>
-        <div>
-          <GlobalOutlined className={styles.icons} />
-          <ShoppingCartOutlined className={styles.icons} />
-        </div>
-      </nav>
+  useEffect(() => {
+    setQuantity(productCount || 1);
+  }, [productCount]);
 
+  const handleAddToCart = () => {
+    if (quantity === 0) {
+      dispatch(removeItem(product.fields.slug));
+      return;
+    }
+    dispatch(
+      addItem({
+        product,
+        quantity,
+      })
+    );
+  };
+
+  return (
+    <Layout>
       <div className="product-info">
         <Row className={styles.row}>
           <Col span={14}>
             <div className={styles.carousel}>
               <Carousel
-                dotPosition="right"
-                slidesToShow={3}
-                centerMode={true}
+                dotPosition="bottom"
                 draggable={true}
                 swipeToSlide={true}
-                touchThreshold={50}
-                focusOnSelect={true}
               >
+                {!productFields.gallery?.length && (
+                  <div>
+                    <img
+                      style={contentStyle}
+                      src={getImageURLFromAsset()}
+                      alt="product"
+                    />
+                  </div>
+                )}
                 {productFields.gallery?.map((image, i) => (
                   <div key={i}>
                     <img
                       style={contentStyle}
-                      src={`https:${image.fields?.file?.url}`}
+                      src={getImageURLFromAsset(image)}
                       alt="product"
                     />
                   </div>
@@ -101,11 +124,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           </Col>
           <Col span={10}>
             <div className={styles.carousel}>
-              <Card
-                title={productFields.name}
-                bordered={false}
-                style={{ width: 570 }}
-              >
+              <Card title={productFields.name} bordered={false}>
                 {ProductBody}
                 <p
                   className={
@@ -142,18 +161,23 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                 <br />
                 <Select
                   className={styles.select}
-                  defaultValue="1"
+                  value={quantity}
+                  onChange={(value) => setQuantity(value)}
                   style={{ width: 60 }}
-                  options={[
-                    { value: 1, label: "1" },
-                    { value: 2, label: "2" },
-                    { value: 3, label: "3" },
-                    { value: 4, label: "4" },
-                    { value: 5, label: "5" },
-                  ]}
+                  options={
+                    [
+                      isProductInCart ? { value: 0, label: "0" } : false,
+                      { value: 1, label: "1" },
+                      { value: 2, label: "2" },
+                      { value: 3, label: "3" },
+                      { value: 4, label: "4" },
+                      { value: 5, label: "5" },
+                    ].filter(Boolean) as BaseOptionType[]
+                  }
                 />
-                <Button type="primary" size={"large"}>
-                  Añadir al carrito {<ShoppingCartOutlined />}
+                <Button type="primary" size={"large"} onClick={handleAddToCart}>
+                  {isProductInCart ? "Actualizar carrito" : "Añadir al carrito"}
+                  {<ShoppingCartOutlined />}
                 </Button>
               </Card>
             </div>
@@ -193,7 +217,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           <RightOutlined className={styles.buttons} />
         </Row>
       </div>
-    </>
+    </Layout>
   );
 };
 

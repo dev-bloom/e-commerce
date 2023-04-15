@@ -1,5 +1,9 @@
 .layoutHeader {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+}
+
+.layoutBody {
+  min-height: calc(100vh - 8rem);
 }

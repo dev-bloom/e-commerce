@@ -2,12 +2,12 @@ import type { AppProps } from "next/app";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { createWrapper } from "next-redux-wrapper";
+import { wrapper } from "../store/index";
 
-import store from "@/store";
 import "@/styles/globals.css";
 
-const App = ({ Component, pageProps }: AppProps) => {
+const App = ({ Component, pageProps, ...rest }: AppProps) => {
+  const { store } = wrapper.useWrappedStore(rest);
   const persistor = persistStore(store);
   return (
     <Provider store={store}>
@@ -18,7 +18,4 @@ const App = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-const makeStore = () => store;
-const wrapper = createWrapper(makeStore);
-
-export default wrapper.withRedux(App);
+export default App;

@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import contentfulClient from "@/utils/contentfulClient";
 import { Document } from "@contentful/rich-text-types";
 import { Asset, BaseEntry } from "contentful";
+import { getFirstProductGalleryImage } from "@/utils/api/helpers";
 
 interface ContentFulEntry<T> extends BaseEntry {
   fields: T;
@@ -18,10 +19,7 @@ export type ProductFields = {
   allowBackorder?: boolean;
   discountPercent?: number;
   gallery?: Asset[];
-  relatedProducts?: ContentFulEntry<{
-    fields: ProductFields;
-    contentTypeId: "product";
-  }>[];
+  relatedProducts?: ContentFulEntry<ProductFields>[];
 };
 
 export type ProductSkeleton = {
@@ -35,10 +33,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Product[]>
 ) {
-  const products = await contentfulClient.getEntries<ProductSkeleton>({
-    content_type: "product",
-    include: 1,
-  });
+  const products =
+    await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
+      content_type: "product",
+      limit: 20,
+      skip: +(req.query.skip ?? 0),
+    });
 
-  res.status(200).json(products.items);
+  const mappedProducts = await Promise.all(
+    products.items.map(async (product) => ({
+      ...product,
+      fields: {
+        ...product.fields,
+        gallery: await getFirstProductGalleryImage(product),
+      },
+    }))
+  );
+
+  res.status(200).json(mappedProducts);
 }

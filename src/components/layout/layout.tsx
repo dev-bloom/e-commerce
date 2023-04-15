@@ -9,7 +9,6 @@ import { selectTotalProducts } from "@/store/cart";
 
 const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
   const cartTotal = useSelector(selectTotalProducts);
-  console.debug(cartTotal);
 
   return (
     <ANTDLayout>

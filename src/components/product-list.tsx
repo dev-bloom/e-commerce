@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Avatar, Card, Row, Col } from "antd";
 import { PropsWithChildren } from "react";
+import { getFirstProductImageURL } from "@/utils/helpers";
 
 export default function ProductList({
   products,
@@ -24,10 +25,7 @@ export default function ProductList({
               <Card
                 style={{ width: 300 }}
                 cover={
-                  <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                  />
+                  <img alt="example" src={getFirstProductImageURL(product)} />
                 }
                 actions={[
                   <SettingOutlined key="setting" />,

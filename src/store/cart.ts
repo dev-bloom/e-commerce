@@ -41,11 +41,9 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ slug: string; quantity: number }>
     ) => {
-      console.debug(action);
       const itemIndex = state.items.findIndex(
         (item) => item.product.fields.slug === action.payload.slug
       );
-      console.debug(itemIndex);
 
       if (itemIndex !== -1) {
         state.items[itemIndex].quantity = action.payload.quantity;

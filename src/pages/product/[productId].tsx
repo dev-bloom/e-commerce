@@ -194,6 +194,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
         </Row>
         <Row className={styles.rowRelated}>
           {productFields.relatedProducts?.map((card, i) => {
+            console.debug(card);
             return (
               <Link key={i} href={`/product/${card.fields.slug}`}>
                 <Card

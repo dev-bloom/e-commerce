@@ -15,7 +15,16 @@ export const getRelatedProducts = async (
         .map((relatedProduct) => relatedProduct.sys.id)
         .join(","),
     } as EntriesQueries<ProductSkeleton, undefined>);
-  return relatedProductsResponse.items;
+  const relatedProductsWithFirstImage = await Promise.all(
+    relatedProductsResponse.items.map(async (relatedProduct) => ({
+      ...relatedProduct,
+      fields: {
+        ...relatedProduct.fields,
+        gallery: await getFirstProductGalleryImage(relatedProduct),
+      },
+    }))
+  );
+  return relatedProductsWithFirstImage;
 };
 
 export const getProductGallery = async (product: Product): Promise<Asset[]> => {

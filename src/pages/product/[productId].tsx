@@ -1,5 +1,6 @@
 import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import {
@@ -16,7 +17,7 @@ import {
 } from "@/store/cart";
 import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
-import { getImageURLFromAsset } from "@/utils/helpers";
+import { getImageURLFromAsset, getFirstProductImageURL } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
 
 export async function getStaticPaths() {
@@ -72,6 +73,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
   const price =
     product.fields.price - (product.fields.price * discountPercent) / 100;
   const ProductBody = documentToReactComponents(productFields.longDescription);
+  const { Meta } = Card;
 
   useEffect(() => {
     setQuantity(productCount || 1);
@@ -89,6 +91,8 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
       })
     );
   };
+
+  console.log(productFields);
 
   return (
     <Layout>
@@ -189,32 +193,53 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           </Col>
         </Row>
         <Row className={styles.rowRelated}>
-          <LeftOutlined className={styles.buttons} />
-          <div className={styles.related} ref={refContainer}>
-            {productFields.gallery?.map((card, i) => {
-              return (
+          {productFields.relatedProducts?.map((card, i) => {
+            return (
+              <Link key={i} href={`/product/${card.fields.slug}`}>
                 <Card
-                  key={i}
                   hoverable
-                  style={{
-                    width: 240,
-                  }}
+                  style={{ width: 250 }}
                   cover={
-                    <img
-                      alt="example"
-                      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                    <div
+                      style={{
+                        backgroundImage: `url(${getFirstProductImageURL(
+                          card
+                        )})`,
+                        width: "100%",
+                        height: "250px",
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                      }}
                     />
                   }
                 >
-                  <Card.Meta
-                    title="Europe Street beat"
-                    description="www.instagram.com"
-                  />
+                  <Meta title={card.fields.name} />
+                  <p>
+                    $
+                    {card.fields.discountPercent
+                      ? card.fields.price *
+                        (1 - card.fields.discountPercent / 100)
+                      : card.fields.price}
+                  </p>
+                  {!!card.fields.discountPercent && (
+                    <Tag bordered={false} color="green">
+                      {card.fields.discountPercent}% OFF
+                    </Tag>
+                  )}
+                  <Space size={[0, "small"]} wrap>
+                    {card.fields.tags.map((tag, i) => {
+                      return (
+                        <Tag key={i} bordered={false}>
+                          {tag}
+                        </Tag>
+                      );
+                    })}
+                  </Space>
                 </Card>
-              );
-            })}
-          </div>
-          <RightOutlined className={styles.buttons} />
+              </Link>
+            );
+          })}
         </Row>
       </div>
     </Layout>

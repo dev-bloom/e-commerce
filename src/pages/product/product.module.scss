@@ -1,63 +1,48 @@
 .nav {
-    height: 60px;
-    width: 100%;
-    border-bottom: 1px solid #eceff1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid #eceff1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .icons {
-    margin: 10px;
+  margin: 10px;
 }
 
 .row {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
-.carousel {
-    padding: 20px;
+.wrapper {
+  padding: 20px;
 }
 
 .select {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .discount {
-    text-decoration: line-through;
-
+  text-decoration: line-through;
 }
 
 .dprice {
-    display: inline;
-    margin-right: 10px;
+  display: inline;
+  margin-right: 10px;
 }
 
 .nodiscount {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .related {
-    margin: 0 auto;
-    display: flex;
-    gap: 80px;
-    padding: 20px;
-    overflow-x: scroll;
-    width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  align-items: center;
 }
 
-.rowRelated {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-
-    ::-webkit-scrollbar {
-        display: none
-    }
-}
-
-.buttons {
-    font-size: 30px;
-    // border: 1px solid blue;
+.dprices {
+  display: inline-block;
 }

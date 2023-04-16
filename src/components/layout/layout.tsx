@@ -16,7 +16,7 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
         style={{
           position: "sticky",
           top: 0,
-          zIndex: 1,
+          zIndex: 100,
           width: "100%",
           backgroundColor: "white",
         }}

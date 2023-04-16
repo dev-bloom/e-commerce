@@ -1,13 +1,11 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
+import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import {
-  ShoppingCartOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "@/pages/api/products";
 import {
   addItem,
@@ -19,6 +17,7 @@ import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
 import { getImageURLFromAsset, getFirstProductImageURL } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
+import { wrapper } from "../../store/index";
 
 export async function getStaticPaths() {
   const productsResponse = await fetch("http://localhost:3000/api/products");
@@ -51,15 +50,7 @@ export async function getStaticProps({
   };
 }
 
-const contentStyle: React.CSSProperties = {
-  width: "100%",
-  color: "#fff",
-  height: "400px",
-  textAlign: "center",
-};
-
 const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
-  const refContainer = useRef(null);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const productCount = useSelector(
@@ -69,11 +60,20 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     selectIsProductInCart(product.fields.slug)
   );
   const { fields: productFields } = product;
+  const { Meta } = Card;
+
   const discountPercent = productFields.discountPercent ?? 0;
   const price =
     product.fields.price - (product.fields.price * discountPercent) / 100;
   const ProductBody = documentToReactComponents(productFields.longDescription);
-  const { Meta } = Card;
+
+  const contentStyle: React.CSSProperties = {
+    width: "100%",
+    color: "#fff",
+    height: "550px",
+    textAlign: "center",
+    objectFit: "cover",
+  };
 
   useEffect(() => {
     setQuantity(productCount || 1);
@@ -92,28 +92,18 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     );
   };
 
-  console.log(productFields);
-
   return (
     <Layout>
       <div className="product-info">
         <Row className={styles.row}>
-          <Col span={14}>
-            <div className={styles.carousel}>
+          <Col span={12}>
+            <div className={styles.wrapper}>
               <Carousel
-                dotPosition="bottom"
-                draggable={true}
-                swipeToSlide={true}
+                showArrows={true}
+                width={"100%"}
+                dynamicHeight={true}
+                showThumbs={false}
               >
-                {!productFields.gallery?.length && (
-                  <div>
-                    <img
-                      style={contentStyle}
-                      src={getImageURLFromAsset()}
-                      alt="product"
-                    />
-                  </div>
-                )}
                 {productFields.gallery?.map((image, i) => (
                   <div key={i}>
                     <img
@@ -126,8 +116,8 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
               </Carousel>
             </div>
           </Col>
-          <Col span={10}>
-            <div className={styles.carousel}>
+          <Col span={12}>
+            <div className={styles.wrapper}>
               <Card title={productFields.name} bordered={false}>
                 {ProductBody}
                 <p
@@ -143,7 +133,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                   </p>
                 )}
                 {!!discountPercent && (
-                  <Tag bordered={false} color="red">
+                  <Tag bordered={false} color="green">
                     {productFields.discountPercent}% OFF
                   </Tag>
                 )}
@@ -192,7 +182,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
             <h2>Productos relacionados</h2>
           </Col>
         </Row>
-        <Row className={styles.rowRelated}>
+        <Row className={styles.related}>
           {productFields.relatedProducts?.map((card, i) => {
             console.debug(card);
             return (
@@ -211,12 +201,13 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                         backgroundPosition: "center",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
+                        borderRadius: "10px",
                       }}
                     />
                   }
                 >
                   <Meta title={card.fields.name} />
-                  <p>
+                  <p className={styles.dprices}>
                     $
                     {card.fields.discountPercent
                       ? card.fields.price *

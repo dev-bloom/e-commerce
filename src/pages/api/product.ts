@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import contentfulClient from "@/utils/contentfulClient";
 import { Product, ProductSkeleton } from "./products";
-import { Asset, EntriesQueries } from "contentful";
+import { EntriesQueries } from "contentful";
 import { getProductGallery, getRelatedProducts } from "@/utils/api/helpers";
 
 export default async function handler(

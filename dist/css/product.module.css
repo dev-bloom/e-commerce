@@ -1,0 +1,91 @@
+.nav {
+  height: 60px;
+  width: 100%;
+  border-bottom: 1px solid #eceff1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.icons {
+  margin: 10px;
+}
+
+.row {
+  margin-top: 50px;
+}
+
+.carousel {
+  padding: 20px;
+}
+
+.select {
+  margin-right: 10px;
+}
+
+.discount {
+  text-decoration: line-through;
+}
+
+.dprice {
+  display: inline;
+  margin-right: 10px;
+}
+
+.nodiscount {
+  font-weight: bold;
+}
+
+.related {
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 80px;
+  padding: 20px;
+  overflow-x: scroll;
+  width: 80%;
+}
+
+.rowRelated {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 20px;
+}
+
+.buttons {
+  font-size: 30px;
+}
+
+.caro {
+  background-image: url("https://www.autofacil.es/wp-content/uploads/2022/11/ferrari-vision-gran-turismo.jpg");
+  width: 100%;
+  height: 1000px;
+  background-position: "center";
+  background-size: "cover";
+  background-repeat: "no-repeat";
+}
+
+.caro2 {
+  background-image: url("https://www.shutterstock.com/image-illustration/szczecinpolanddecember-2021the-ferrari-daytona-sp3-260nw-2094043855.jpg");
+  width: 100%;
+  height: 1000px;
+  background-position: "center";
+  background-size: "cover";
+  background-repeat: "no-repeat";
+}
+/*# sourceMappingURL=product.module.css.map */

@@ -12,16 +12,7 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return (
     <ANTDLayout>
-      <ANTDLayout.Header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 1,
-          width: "100%",
-          backgroundColor: "white",
-        }}
-        className={styles.layoutHeader}
-      >
+      <ANTDLayout.Header className={styles.layoutHeader}>
         <Link href={`/`}>PISTON WRAPS</Link>
         <Input.Search placeholder="input search text" style={{ width: 200 }} />
         <Link href="/cart">

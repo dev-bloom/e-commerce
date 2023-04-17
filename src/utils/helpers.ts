@@ -6,7 +6,7 @@ export const discountedPrice = ({
 }: Product): number => price - (price * (discountPercent ?? 0)) / 100;
 
 export const getImageURLFromAsset = (asset?: Asset): string => {
-  if (!asset?.fields.file) {
+  if (!asset?.fields?.file) {
     return "/images/placeholder.png";
   }
   const file = asset.fields.file as AssetFile;

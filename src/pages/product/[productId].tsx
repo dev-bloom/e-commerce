@@ -1,12 +1,11 @@
-import React, { PropsWithChildren, useEffect, useRef, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Row, Col, Carousel, Card, Space, Tag, Button, Select } from "antd";
+import Link from "next/link";
+import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import {
-  ShoppingCartOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from "@ant-design/icons";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "@/pages/api/products";
 import {
   addItem,
@@ -16,8 +15,9 @@ import {
 } from "@/store/cart";
 import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
-import { getImageURLFromAsset } from "@/utils/helpers";
+import { getImageURLFromAsset, getFirstProductImageURL } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
+import { wrapper } from "../../store/index";
 
 export async function getStaticPaths() {
   const productsResponse = await fetch("http://localhost:3000/api/products");
@@ -50,15 +50,7 @@ export async function getStaticProps({
   };
 }
 
-const contentStyle: React.CSSProperties = {
-  width: "100%",
-  color: "#fff",
-  height: "400px",
-  textAlign: "center",
-};
-
 const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
-  const refContainer = useRef(null);
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const productCount = useSelector(
@@ -68,14 +60,23 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     selectIsProductInCart(product.fields.slug)
   );
   const { fields: productFields } = product;
+
   const discountPercent = productFields.discountPercent ?? 0;
   const price =
     product.fields.price - (product.fields.price * discountPercent) / 100;
+
   const ProductBody = documentToReactComponents(productFields.longDescription);
 
-  useEffect(() => {
-    setQuantity(productCount || 1);
-  }, [productCount]);
+  const relatedPrices = productFields.relatedProducts?.map((card) => {
+    return (
+      <p key={card.fields.slug} className={styles.dprices}>
+        $
+        {card.fields.discountPercent
+          ? card.fields.price * (1 - card.fields.discountPercent / 100)
+          : card.fields.price}
+      </p>
+    );
+  });
 
   const handleAddToCart = () => {
     if (quantity === 0) {
@@ -90,30 +91,28 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     );
   };
 
+  useEffect(() => {
+    setQuantity(productCount || 1);
+  }, [productCount]);
+
+  console.log(productFields);
+
   return (
     <Layout>
       <div className="product-info">
         <Row className={styles.row}>
-          <Col span={14}>
-            <div className={styles.carousel}>
+          <Col span={12}>
+            <div className={styles.wrapper}>
               <Carousel
-                dotPosition="bottom"
-                draggable={true}
-                swipeToSlide={true}
+                showArrows={true}
+                width={"100%"}
+                dynamicHeight={true}
+                showThumbs={false}
               >
-                {!productFields.gallery?.length && (
-                  <div>
+                {productFields.gallery?.map((image) => (
+                  <div key={image.sys.id}>
                     <img
-                      style={contentStyle}
-                      src={getImageURLFromAsset()}
-                      alt="product"
-                    />
-                  </div>
-                )}
-                {productFields.gallery?.map((image, i) => (
-                  <div key={i}>
-                    <img
-                      style={contentStyle}
+                      className={styles.carouselImg}
                       src={getImageURLFromAsset(image)}
                       alt="product"
                     />
@@ -122,8 +121,8 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
               </Carousel>
             </div>
           </Col>
-          <Col span={10}>
-            <div className={styles.carousel}>
+          <Col span={12}>
+            <div className={styles.wrapper}>
               <Card title={productFields.name} bordered={false}>
                 {ProductBody}
                 <p
@@ -139,7 +138,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                   </p>
                 )}
                 {!!discountPercent && (
-                  <Tag bordered={false} color="red">
+                  <Tag bordered={false} color="green">
                     {productFields.discountPercent}% OFF
                   </Tag>
                 )}
@@ -184,37 +183,44 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           </Col>
         </Row>
         <Row>
-          <Col className={styles.carousel} span={24}>
+          <Col span={24}>
             <h2>Productos relacionados</h2>
           </Col>
         </Row>
-        <Row className={styles.rowRelated}>
-          <LeftOutlined className={styles.buttons} />
-          <div className={styles.related} ref={refContainer}>
-            {productFields.gallery?.map((card, i) => {
-              return (
-                <Card
-                  key={i}
-                  hoverable
-                  style={{
-                    width: 240,
-                  }}
-                  cover={
-                    <img
-                      alt="example"
-                      src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                    />
-                  }
-                >
-                  <Card.Meta
-                    title="Europe Street beat"
-                    description="www.instagram.com"
+        <Row className={styles.related}>
+          {productFields.relatedProducts?.map((card, i) => (
+            <Link key={card.fields.slug} href={`/product/${card.fields.slug}`}>
+              <Card
+                hoverable
+                className={styles.relatedCard}
+                cover={
+                  <div
+                    className={styles.cardImg}
+                    style={{
+                      backgroundImage: `url(${getFirstProductImageURL(card)})`,
+                    }}
                   />
-                </Card>
-              );
-            })}
-          </div>
-          <RightOutlined className={styles.buttons} />
+                }
+              >
+                <Card.Meta title={card.fields.name} />
+                {relatedPrices && relatedPrices[i]}
+                {!!card.fields.discountPercent && (
+                  <Tag bordered={false} color="green">
+                    {card.fields.discountPercent}% OFF
+                  </Tag>
+                )}
+                <Space size={[0, "small"]} wrap>
+                  {card.fields.tags.map((tag, i) => {
+                    return (
+                      <Tag key={i} bordered={false}>
+                        {tag}
+                      </Tag>
+                    );
+                  })}
+                </Space>
+              </Card>
+            </Link>
+          ))}
         </Row>
       </div>
     </Layout>

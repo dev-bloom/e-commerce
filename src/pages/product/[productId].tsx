@@ -7,6 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "@/pages/api/products";
+import RelatedCard from "@/components/RelatedCard";
 import {
   addItem,
   removeItem,
@@ -15,7 +16,7 @@ import {
 } from "@/store/cart";
 import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
-import { getImageURLFromAsset, getFirstProductImageURL } from "@/utils/helpers";
+import { getImageURLFromAsset } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
 import { wrapper } from "../../store/index";
 
@@ -188,38 +189,8 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
           </Col>
         </Row>
         <Row className={styles.related}>
-          {productFields.relatedProducts?.map((card, i) => (
-            <Link key={card.fields.slug} href={`/product/${card.fields.slug}`}>
-              <Card
-                hoverable
-                className={styles.relatedCard}
-                cover={
-                  <div
-                    className={styles.cardImg}
-                    style={{
-                      backgroundImage: `url(${getFirstProductImageURL(card)})`,
-                    }}
-                  />
-                }
-              >
-                <Card.Meta title={card.fields.name} />
-                {relatedPrices && relatedPrices[i]}
-                {!!card.fields.discountPercent && (
-                  <Tag bordered={false} color="green">
-                    {card.fields.discountPercent}% OFF
-                  </Tag>
-                )}
-                <Space size={[0, "small"]} wrap>
-                  {card.fields.tags.map((tag, i) => {
-                    return (
-                      <Tag key={i} bordered={false}>
-                        {tag}
-                      </Tag>
-                    );
-                  })}
-                </Space>
-              </Card>
-            </Link>
+          {productFields.relatedProducts?.map((card) => (
+            <RelatedCard card={card} key={card.fields.slug} />
           ))}
         </Row>
       </div>

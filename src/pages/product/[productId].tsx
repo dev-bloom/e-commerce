@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "@/pages/api/products";
-import RelatedCard from "@/components/RelatedCard";
+import RelatedCard from "@/components/page-components/detail-screen/RelatedCard";
 import {
   addItem,
   removeItem,

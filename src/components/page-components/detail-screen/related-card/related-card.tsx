@@ -1,20 +1,20 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Card, Space, Tag } from "antd";
 import Link from "next/link";
 import { getFirstProductImageURL } from "@/utils/helpers";
 import { Product } from "@/pages/api/products";
-import styles from "./realtedCard.module.scss";
+import styles from "./related-card.module.scss";
 
 interface Props {
   card: Product;
 }
 
-const RelatedCard = ({ card }: Props) => {
+const RelatedCard = ({ card }: Props): ReactElement => {
   const {
     fields: { discountPercent: discount, price, slug, name, tags },
   } = card;
 
-  const realPrice = discount ? price * (1 - discount / 100) : price;
+  const realPrice = price - (price * discount) / 100;
 
   return (
     <Link key={slug} href={`/product/${slug}`}>
@@ -31,20 +31,22 @@ const RelatedCard = ({ card }: Props) => {
         }
       >
         <Card.Meta title={name} />
-        <p className={discount ? styles.dprices : ""}>{realPrice}</p>
-        {!!discount && (
-          <Tag bordered={false} color="green">
-            {discount}% OFF
-          </Tag>
-        )}
-        <Space size={[0, "small"]} wrap>
-          {tags.map((tag, i) => {
-            return (
-              <Tag key={i} bordered={false}>
-                {tag}
+        <p>
+          ${realPrice}
+          {!!discount && (
+            <span>
+              <Tag className={styles.dprices} bordered={false} color="green">
+                {discount}% OFF
               </Tag>
-            );
-          })}
+            </span>
+          )}
+        </p>
+        <Space size={[0, "small"]} wrap>
+          {tags.map((tag, i) => (
+            <Tag key={i} bordered={false}>
+              {tag}
+            </Tag>
+          ))}
         </Space>
       </Card>
     </Link>

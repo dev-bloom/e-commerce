@@ -7,7 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Product } from "@/pages/api/products";
-import RelatedCard from "@/components/page-components/detail-screen/RelatedCard";
+import RelatedCard from "@/components/page-components/detail-screen/related-card/related-card";
 import {
   addItem,
   removeItem,
@@ -67,17 +67,6 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     product.fields.price - (product.fields.price * discountPercent) / 100;
 
   const ProductBody = documentToReactComponents(productFields.longDescription);
-
-  const relatedPrices = productFields.relatedProducts?.map((card) => {
-    return (
-      <p key={card.fields.slug} className={styles.dprices}>
-        $
-        {card.fields.discountPercent
-          ? card.fields.price * (1 - card.fields.discountPercent / 100)
-          : card.fields.price}
-      </p>
-    );
-  });
 
   const handleAddToCart = () => {
     if (quantity === 0) {

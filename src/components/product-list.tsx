@@ -5,7 +5,7 @@ import {
   EllipsisOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import { Avatar, Card, Row, Col } from "antd";
+import { Card, Row, Col } from "antd";
 import { PropsWithChildren } from "react";
 import { getFirstProductImageURL } from "@/utils/helpers";
 
@@ -34,9 +34,6 @@ export default function ProductList({
                 ]}
               >
                 <Card.Meta
-                  avatar={
-                    <Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />
-                  }
                   title={productFields.name}
                   description={productFields.shortDescription}
                 />

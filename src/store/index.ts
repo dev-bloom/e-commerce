@@ -26,9 +26,10 @@ const persistConfig = {
   key: "root",
   version: 1,
   storage,
+  timeout: 100,
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, reducer);
 
 const store = configureStore({
   reducer: persistedReducer,

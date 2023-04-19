@@ -5,13 +5,21 @@ import { PersistGate } from "redux-persist/integration/react";
 import { wrapper } from "../store/index";
 
 import "@/styles/globals.css";
+import { Spin } from "antd";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
+
+const Loader = () => (
+  <Spin
+    indicator={<Loading3QuartersOutlined style={{ fontSize: 24 }} spin />}
+  />
+);
 
 const App = ({ Component, pageProps, ...rest }: AppProps) => {
   const { store } = wrapper.useWrappedStore(rest);
   const persistor = persistStore(store);
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Loader />} persistor={persistor}>
         <Component {...pageProps} />
       </PersistGate>
     </Provider>

@@ -1,6 +1,5 @@
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Link from "next/link";
 import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -18,7 +17,6 @@ import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
 import { getImageURLFromAsset } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
-import { wrapper } from "../../store/index";
 
 export async function getStaticPaths() {
   const productsResponse = await fetch("http://localhost:3000/api/products");
@@ -85,8 +83,6 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
     setQuantity(productCount || 1);
   }, [productCount]);
 
-  console.log(productFields);
-
   return (
     <Layout>
       <div className="product-info">
@@ -99,15 +95,23 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
                 dynamicHeight={true}
                 showThumbs={false}
               >
-                {productFields.gallery?.map((image) => (
-                  <div key={image.sys.id}>
-                    <img
-                      className={styles.carouselImg}
-                      src={getImageURLFromAsset(image)}
-                      alt="product"
-                    />
-                  </div>
-                ))}
+                {productFields.gallery?.length
+                  ? productFields.gallery?.map((image) => (
+                      <img
+                        key={image.sys.id}
+                        className={styles.carouselImg}
+                        src={getImageURLFromAsset(image)}
+                        alt="product"
+                      />
+                    ))
+                  : [
+                      <img
+                        key="placeholder"
+                        className={styles.carouselImg}
+                        src={getImageURLFromAsset()}
+                        alt="product"
+                      />,
+                    ]}
               </Carousel>
             </div>
           </Col>
@@ -172,16 +176,16 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
             </div>
           </Col>
         </Row>
-        <Row>
-          <Col span={24}>
-            <h2>Productos relacionados</h2>
-          </Col>
-        </Row>
-        <Row className={styles.related}>
-          {productFields.relatedProducts?.map((card) => (
-            <RelatedCard card={card} key={card.fields.slug} />
-          ))}
-        </Row>
+        {!!productFields.relatedProducts?.length && (
+          <Row className={styles.related}>
+            <Col span={24}>
+              <h2>Productos relacionados</h2>
+            </Col>
+            {productFields.relatedProducts.map((card) => (
+              <RelatedCard card={card} key={card.fields.slug} />
+            ))}
+          </Row>
+        )}
       </div>
     </Layout>
   );

@@ -14,7 +14,7 @@ const RelatedCard = ({ card }: Props): ReactElement => {
     fields: { discountPercent: discount, price, slug, name, tags },
   } = card;
 
-  const realPrice = price - (price * discount) / 100;
+  const realPrice = price - (price * (discount ?? 0)) / 100;
 
   return (
     <Link key={slug} href={`/product/${slug}`}>

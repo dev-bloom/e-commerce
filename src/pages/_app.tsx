@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { wrapper } from "../store/index";
 
-import "@/styles/globals.css";
+import "@/styles/globals.scss";
 import { Spin } from "antd";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
 

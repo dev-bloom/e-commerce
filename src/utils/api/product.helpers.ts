@@ -1,6 +1,51 @@
 import { Product, ProductSkeleton } from "@/pages/api/products";
-import contentfulClient from "../contentfulClient";
 import { Asset, EntriesQueries } from "contentful";
+import contentfulClient from "../contentfulClient";
+
+export const getProducts = async (skip = 0): Promise<Product[]> => {
+  const products =
+    await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
+      content_type: "product",
+      limit: 20,
+      skip,
+    });
+
+  const mappedProducts = await Promise.all(
+    products.items.map(async (product) => ({
+      ...product,
+      fields: {
+        ...product.fields,
+        gallery: await getFirstProductGalleryImage(product),
+      },
+    }))
+  );
+
+  return mappedProducts;
+};
+
+export const getProduct = async (slug: string): Promise<Product> => {
+  const products =
+    await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
+      content_type: "product",
+      "fields.slug": slug,
+      limit: 1,
+    } as EntriesQueries<ProductSkeleton, undefined>);
+  const product: Product = products.items[0];
+
+  const [relatedProducts, productGallery] = await Promise.all([
+    getRelatedProducts(product),
+    getProductGallery(product),
+  ]);
+
+  return {
+    ...product,
+    fields: {
+      ...product.fields,
+      relatedProducts,
+      gallery: productGallery,
+    },
+  };
+};
 
 export const getRelatedProducts = async (
   product: Product

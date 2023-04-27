@@ -3,13 +3,14 @@ import Layout from "@/components/layout/layout";
 
 import { FC, PropsWithChildren } from "react";
 import { Product } from "./api/products";
+import { getProducts } from "@/utils/api/product.helpers";
 
 export async function getStaticProps() {
-  const productsResponse = await fetch("http://localhost:3000/api/products");
-  const formattedProducts = await productsResponse.json();
+  const products = await getProducts();
+
   return {
     props: {
-      products: formattedProducts,
+      products,
     },
   };
 }

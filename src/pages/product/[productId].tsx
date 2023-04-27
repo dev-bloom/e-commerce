@@ -17,12 +17,12 @@ import Layout from "@/components/layout/layout";
 import styles from "./product.module.scss";
 import { getImageURLFromAsset } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
+import { getProduct, getProducts } from "@/utils/api/product.helpers";
 
 export async function getStaticPaths() {
-  const productsResponse = await fetch("http://localhost:3000/api/products");
-  const formattedProducts: Product[] = await productsResponse.json();
-  const paths = formattedProducts.map((product: Product) => ({
-    params: { productId: product.fields.slug },
+  const products = await getProducts();
+  const paths = products.map(({ fields: { slug } }: Product) => ({
+    params: { productId: slug },
   }));
   return {
     paths,
@@ -36,15 +36,11 @@ export async function getStaticProps({
   params: { productId: string };
 }) {
   const { productId } = params;
-  const product = await fetch(
-    "http://localhost:3000/api/product?" +
-      new URLSearchParams({ slug: productId })
-  );
-  const formattedProduct: Product = await product.json();
+  const product = await getProduct(productId);
 
   return {
     props: {
-      product: formattedProduct,
+      product,
     },
   };
 }

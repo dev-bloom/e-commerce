@@ -1,6 +1,6 @@
 import { Product, ProductSkeleton } from "@/pages/api/products";
-import contentfulClient from "../contentfulClient";
 import { Asset, EntriesQueries } from "contentful";
+import contentfulClient from "../contentfulClient";
 
 export const getProducts = async (skip = 0): Promise<Product[]> => {
   const products =

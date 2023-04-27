@@ -1,11 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import contentfulClient from "@/utils/contentfulClient";
 import { Document } from "@contentful/rich-text-types";
 import { Asset, BaseEntry } from "contentful";
-import {
-  getFirstProductGalleryImage,
-  getProducts,
-} from "@/utils/api/product.helpers";
+import { getProducts } from "@/utils/api/product.helpers";
 
 interface ContentFulEntry<T> extends BaseEntry {
   fields: T;

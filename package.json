@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "expose": "lt --port 3000",
+    "dev:local": "next dev",
+    "dev": "concurrently \"npm run dev:local\" \"npm run expose\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -36,6 +38,8 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/safe-json-stringify": "^1.1.2"
+    "@types/safe-json-stringify": "^1.1.2",
+    "concurrently": "^8.0.1",
+    "localtunnel": "^2.0.2"
   }
 }

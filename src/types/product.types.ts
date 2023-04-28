@@ -1,5 +1,6 @@
 import { Asset } from "contentful";
 import { ContentFulEntry } from "./global.types";
+import { Document } from "@contentful/rich-text-types";
 
 export type ProductFields = {
   name: string;

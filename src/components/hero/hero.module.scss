@@ -1,0 +1,27 @@
+@import "@/styles/mixins";
+
+$hero-height: 60vh;
+.hero {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: $hero-height;
+  background-color: var(--secondary-color-brighten-30);
+}
+
+.title {
+  @include impactFont();
+  color: var(--primary-color-brighten-20) !important;
+  text-align: center;
+}
+
+.image {
+  max-height: calc(#{$hero-height} - 2em);
+  border-radius: 20px;
+  border: dashed 5px var(--secondary-color-brighten-20);
+}
+
+.content {
+  text-align: left;
+  max-width: 400px;
+}

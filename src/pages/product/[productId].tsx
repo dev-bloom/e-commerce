@@ -31,7 +31,7 @@ export async function getStaticPaths() {
   }));
   return {
     paths,
-    fallback: true,
+    fallback: "blocking",
   };
 }
 
@@ -46,6 +46,12 @@ export async function getStaticProps({
 }) {
   const { productId } = params;
   const product = await getProduct(productId);
+
+  if (!product) {
+    return {
+      notFound: true,
+    };
+  }
 
   return getGlobalStaticProps({ product }, { revalidate: 60 });
 }
@@ -86,6 +92,7 @@ const ProductId: ProductIdProps = ({ product, branding }) => {
     setQuantity(productCount || 1);
   }, [productCount]);
 
+  if (!product) return null;
   return (
     <Layout branding={branding}>
       <PageHead branding={branding} title={productFields.name} />

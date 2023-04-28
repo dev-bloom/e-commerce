@@ -23,7 +23,7 @@ export const getProducts = async (skip = 0): Promise<Product[]> => {
   return mappedProducts;
 };
 
-export const getProduct = async (slug: string): Promise<Product> => {
+export const getProduct = async (slug: string): Promise<Product | null> => {
   const products =
     await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
       content_type: "product",
@@ -31,6 +31,9 @@ export const getProduct = async (slug: string): Promise<Product> => {
       limit: 1,
     } as EntriesQueries<ProductSkeleton, undefined>);
   const product: Product = products.items[0];
+  if (!product) {
+    return null;
+  }
 
   const [relatedProducts, productGallery] = await Promise.all([
     getRelatedProducts(product),

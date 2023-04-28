@@ -1,5 +1,5 @@
 import { Layout as ANTDLayout } from "antd";
-import { FC, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { PropsWithChildren } from "react";
 import Link from "next/link";
 import { ShoppingCartOutlined } from "@ant-design/icons";
@@ -14,9 +14,14 @@ import Head from "next/head";
 
 interface LayoutProps {
   branding: Branding;
+  top?: ReactNode;
 }
 
-const Layout: FC<PropsWithChildren<LayoutProps>> = ({ children, branding }) => {
+const Layout: FC<PropsWithChildren<LayoutProps>> = ({
+  children,
+  branding,
+  top,
+}) => {
   const cartTotal = useSelector(selectTotalProducts);
   const { companyName, logo, primaryColor, secondaryColor, tertiaryColor } =
     branding.fields;
@@ -47,6 +52,7 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({ children, branding }) => {
           <span className={styles.cartTotal}>{cartTotal}</span>
         </Link>
       </ANTDLayout.Header>
+      {top}
       <ANTDLayout.Content
         className={styles.layoutBody}
         style={{ padding: "0 50px" }}

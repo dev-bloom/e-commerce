@@ -2,12 +2,15 @@
 
 body {
   margin: 0;
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 .ant-btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color-darken-10);
   color: var(--primary-color-darken-20);
+
   &:hover {
     background-color: var(--primary-color-darken-10) !important;
     border-color: var(--primary-color-darken-10) !important;

@@ -1,0 +1,28 @@
+@import "@/styles/variables";
+
+
+@mixin breakpoint($breakpoint) {
+    @if $breakpoint =="xsmall" {
+        @media screen and (max-width: 599px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint =="small" {
+        @media screen and (min-width: $small) and (max-width: 959px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint =="medium" {
+        @media screen and (min-width: $medium) and (max-width: 1199px) {
+            @content;
+        }
+    }
+
+    @if $breakpoint =="large" {
+        @media screen and (min-width: $large) {
+            @content;
+        }
+    }
+}

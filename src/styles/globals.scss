@@ -1,13 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .ant-btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color-darken-10);
   color: var(--primary-color-darken-20);
+
   &:hover {
     background-color: var(--primary-color-darken-10) !important;
     border-color: var(--primary-color-darken-10) !important;

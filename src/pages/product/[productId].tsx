@@ -5,7 +5,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import RelatedCard from "@/components/page-components/detail-screen/related-card/related-card";
 import {
   addItem,

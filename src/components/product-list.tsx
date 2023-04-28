@@ -1,4 +1,4 @@
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import Link from "next/link";
 import {
   EditOutlined,

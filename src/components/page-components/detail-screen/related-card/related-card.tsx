@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { Card, Space, Tag } from "antd";
 import Link from "next/link";
 import { getFirstProductImageURL } from "@/utils/helpers";
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import styles from "./related-card.module.scss";
 
 interface Props {

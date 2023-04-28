@@ -8,7 +8,7 @@ import {
   selectTotalPrice,
   updateItemQuantity,
 } from "@/store/cart";
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import { PropsWithChildren } from "react";
 
 interface CartScreenProps {

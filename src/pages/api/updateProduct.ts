@@ -4,7 +4,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { sys, fields } = JSON.parse(JSON.stringify(req.body));
+  const { sys, fields } = req.body;
 
   if (sys.contentType.sys.id === "product") {
     const {

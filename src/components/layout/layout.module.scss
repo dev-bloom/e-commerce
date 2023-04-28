@@ -1,3 +1,5 @@
+@import "@/styles/mixins";
+
 .layoutHeader {
   display: flex;
   justify-content: space-between;
@@ -9,6 +11,33 @@
   background-color: white;
 }
 
+.branding {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  @include impactFont();
+  img {
+    border-radius: 50%;
+  }
+}
+
+.cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25em;
+  @include impactFont();
+  position: relative;
+}
+
+.cartTotal {
+  position: absolute;
+  bottom: -0.5em;
+  right: -0.5em;
+  font-size: large;
+  color: var(--tertiary-color-brighten-10);
+}
+
 .layoutBody {
-  min-height: calc(100vh - 8rem);
+  min-height: calc(100vh - 8em);
 }

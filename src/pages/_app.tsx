@@ -1,12 +1,13 @@
+import { Spin } from "antd";
 import type { AppProps } from "next/app";
+import { Loading3QuartersOutlined } from "@ant-design/icons";
 import { persistStore } from "redux-persist";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+
 import { wrapper } from "../store/index";
 
 import "@/styles/globals.scss";
-import { Spin } from "antd";
-import { Loading3QuartersOutlined } from "@ant-design/icons";
 
 const Loader = () => (
   <Spin

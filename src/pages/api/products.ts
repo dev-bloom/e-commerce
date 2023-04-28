@@ -1,32 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Document } from "@contentful/rich-text-types";
-import { Asset, BaseEntry } from "contentful";
 import { getProducts } from "@/utils/api/product.helpers";
-
-interface ContentFulEntry<T> extends BaseEntry {
-  fields: T;
-}
-
-export type ProductFields = {
-  name: string;
-  shortDescription: string;
-  longDescription: Document;
-  price: number;
-  tags: string[];
-  stock: number;
-  slug: string;
-  allowBackorder?: boolean;
-  discountPercent?: number;
-  gallery?: Asset[];
-  relatedProducts?: ContentFulEntry<ProductFields>[];
-};
-
-export type ProductSkeleton = {
-  fields: ProductFields;
-  contentTypeId: "product";
-};
-
-export type Product = ContentFulEntry<ProductFields>;
+import { Product } from "@/types";
 
 export default async function handler(
   req: NextApiRequest,

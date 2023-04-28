@@ -9,6 +9,16 @@ $hero-height: 60vh;
   background-color: var(--secondary-color-brighten-30);
 }
 
+.card {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-radius: 20px;
+  padding: 1em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
 .title {
   @include impactFont();
   color: var(--primary-color-brighten-20) !important;

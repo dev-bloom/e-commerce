@@ -4,7 +4,7 @@ import { Product } from "@/types";
 import { getFirstProductImageURL } from "@/utils/helpers";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import Link from "next/link";
-import styles from "./Hero.module.scss";
+import styles from "./hero.module.scss";
 
 const { Title, Paragraph } = Typography;
 

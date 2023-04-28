@@ -1,4 +1,4 @@
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import { discountedPrice } from "@/utils/helpers";

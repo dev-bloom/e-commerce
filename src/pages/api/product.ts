@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Product } from "./products";
+import { Product } from "@/types";
 import { getProduct } from "@/utils/api/product.helpers";
 
 export default async function handler(

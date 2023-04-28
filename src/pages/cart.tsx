@@ -4,8 +4,18 @@ import Layout from "@/components/layout/layout";
 import CartScreen from "@/components/page-components/cart/cart-screen";
 import UserScreen from "@/components/page-components/cart/user-screen";
 import SummaryScreen from "@/components/page-components/cart/summary-screen";
+import {
+  PageComponentProps,
+  getGlobalStaticProps,
+} from "@/utils/api/api.helpers";
 
-const Cart = () => {
+export async function getStaticProps() {
+  return getGlobalStaticProps();
+}
+
+type CartProps = PageComponentProps;
+
+const Cart: CartProps = ({ branding }) => {
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
 
@@ -43,7 +53,7 @@ const Cart = () => {
   };
 
   return (
-    <Layout>
+    <Layout branding={branding}>
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
     </Layout>

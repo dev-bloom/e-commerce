@@ -1,4 +1,4 @@
-import { Product } from "@/pages/api/products";
+import { Product } from "@/types";
 import { Asset, AssetFile } from "contentful";
 
 export const discountedPrice = ({

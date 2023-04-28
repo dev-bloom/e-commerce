@@ -1,26 +1,33 @@
+import { FC, PropsWithChildren } from "react";
+// Components
 import ProductList from "@/components/product-list";
 import Layout from "@/components/layout/layout";
-
-import { FC, PropsWithChildren } from "react";
-import { Product } from "./api/products";
+// Types
+import { Product } from "@/types";
+// Helpers
 import { getProducts } from "@/utils/api/product.helpers";
+import {
+  PageComponentProps,
+  PagePropsWithGlobalStaticProps,
+  getGlobalStaticProps,
+} from "@/utils/api/api.helpers";
+
+interface HomeStaticProps {
+  products: Product[];
+}
 
 export async function getStaticProps() {
   const products = await getProducts();
 
-  return {
-    props: {
-      products,
-    },
-  };
+  return getGlobalStaticProps<HomeStaticProps>({ products });
 }
 
-const Home: FC<PropsWithChildren<{ products: Product[] }>> = ({ products }) => {
-  return (
-    <Layout>
-      <ProductList products={products} />
-    </Layout>
-  );
-};
+type HomeProps = PageComponentProps<HomeStaticProps>;
+
+const Home: HomeProps = ({ products, branding }) => (
+  <Layout branding={branding}>
+    <ProductList products={products} />
+  </Layout>
+);
 
 export default Home;

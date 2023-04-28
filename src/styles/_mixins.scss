@@ -1,0 +1,9 @@
+@mixin impactFont() {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: bold;
+  color: var(--primary-color);
+  font-size: x-large;
+  &:hover {
+    color: var(--primary-color-darken-10);
+  }
+}

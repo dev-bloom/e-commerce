@@ -18,6 +18,10 @@ import styles from "./product.module.scss";
 import { getImageURLFromAsset } from "@/utils/helpers";
 import { BaseOptionType } from "antd/es/select";
 import { getProduct, getProducts } from "@/utils/api/product.helpers";
+import {
+  PageComponentProps,
+  getGlobalStaticProps,
+} from "@/utils/api/api.helpers";
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -30,6 +34,10 @@ export async function getStaticPaths() {
   };
 }
 
+interface ProductStaticProps {
+  product: Product;
+}
+
 export async function getStaticProps({
   params,
 }: {
@@ -38,15 +46,12 @@ export async function getStaticProps({
   const { productId } = params;
   const product = await getProduct(productId);
 
-  return {
-    props: {
-      product,
-    },
-    revalidate: 60,
-  };
+  return getGlobalStaticProps({ product }, { revalidate: 60 });
 }
 
-const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
+type ProductIdProps = PageComponentProps<ProductStaticProps>;
+
+const ProductId: ProductIdProps = ({ product, branding }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const productCount = useSelector(
@@ -81,7 +86,7 @@ const ProductId = ({ product }: PropsWithChildren<{ product: Product }>) => {
   }, [productCount]);
 
   return (
-    <Layout>
+    <Layout branding={branding}>
       <div className="product-info">
         <Row className={styles.row}>
           <Col span={12}>

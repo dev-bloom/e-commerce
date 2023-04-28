@@ -1,4 +1,4 @@
-import { Product, ProductSkeleton } from "@/pages/api/products";
+import { Product, ProductSkeleton } from "@/types";
 import { Asset, EntriesQueries } from "contentful";
 import contentfulClient from "../contentfulClient";
 

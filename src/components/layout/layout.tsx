@@ -10,6 +10,7 @@ import { getImageURLFromAsset } from "@/utils/helpers";
 import Image from "next/image";
 import styles from "./layout.module.scss";
 import { setColors } from "@/utils/colors";
+import Head from "next/head";
 
 interface LayoutProps {
   branding: Branding;
@@ -27,6 +28,10 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({ children, branding }) => {
 
   return (
     <ANTDLayout>
+      <Head>
+        <title>{companyName}</title>
+        <link rel="icon" type="image" sizes="16x16" href={logoImage} />
+      </Head>
       <ANTDLayout.Header className={styles.layoutHeader}>
         <Link href={`/`} className={styles.branding}>
           <Image

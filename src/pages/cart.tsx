@@ -8,6 +8,7 @@ import {
   PageComponentProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
+import PageHead from "@/components/page-head/page-head";
 
 export async function getStaticProps() {
   return getGlobalStaticProps();
@@ -54,6 +55,7 @@ const Cart: CartProps = ({ branding }) => {
 
   return (
     <Layout branding={branding}>
+      <PageHead branding={branding} title={steps[current].title}></PageHead>
       <Steps current={current} items={items} />
       <div style={contentStyle}>{steps[current].content}</div>
     </Layout>

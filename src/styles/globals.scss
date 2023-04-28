@@ -3,3 +3,14 @@
 body {
   margin: 0;
 }
+
+.ant-btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color-darken-10);
+  color: var(--primary-color-darken-20);
+  &:hover {
+    background-color: var(--primary-color-darken-10) !important;
+    border-color: var(--primary-color-darken-10) !important;
+    color: var(--primary-color-brighten-10) !important;
+  }
+}

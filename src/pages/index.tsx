@@ -1,4 +1,3 @@
-import { FC, PropsWithChildren } from "react";
 // Components
 import ProductList from "@/components/product-list";
 import Layout from "@/components/layout/layout";
@@ -8,9 +7,9 @@ import { Product } from "@/types";
 import { getProducts } from "@/utils/api/product.helpers";
 import {
   PageComponentProps,
-  PagePropsWithGlobalStaticProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
+import PageHead from "@/components/page-head/page-head";
 
 interface HomeStaticProps {
   products: Product[];
@@ -26,6 +25,7 @@ type HomeProps = PageComponentProps<HomeStaticProps>;
 
 const Home: HomeProps = ({ products, branding }) => (
   <Layout branding={branding}>
+    <PageHead branding={branding} title="Product List" />
     <ProductList products={products} />
   </Layout>
 );

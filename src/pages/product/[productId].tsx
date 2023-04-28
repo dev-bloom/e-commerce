@@ -22,6 +22,7 @@ import {
   PageComponentProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
+import PageHead from "@/components/page-head/page-head";
 
 export async function getStaticPaths() {
   const products = await getProducts();
@@ -87,6 +88,7 @@ const ProductId: ProductIdProps = ({ product, branding }) => {
 
   return (
     <Layout branding={branding}>
+      <PageHead branding={branding} title={productFields.name} />
       <div className="product-info">
         <Row className={styles.row}>
           <Col span={12}>

@@ -9,6 +9,7 @@ import {
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
 import PageHead from "@/components/page-head/page-head";
+import OrderSuccessScreen from "@/components/page-components/cart/order-success-screen/order-success-screen";
 
 export async function getStaticProps() {
   return getGlobalStaticProps();
@@ -30,7 +31,7 @@ const Cart: CartProps = ({ branding }) => {
       content: <CartScreen onNextStep={onNextStep} />,
     },
     {
-      title: "Información envío y facturación",
+      title: "Envío y Facturación",
       content: <UserScreen onNextStep={onNextStep} />,
     },
     {
@@ -38,10 +39,14 @@ const Cart: CartProps = ({ branding }) => {
       content: <SummaryScreen onNextStep={onNextStep} />,
     },
     {
-      title: "Confirmación de pedido",
-      content: "Last-content",
+      title: "Confirmación",
+      content: <OrderSuccessScreen onNextStep={onNextStep} />,
     },
   ];
+
+  const handleStepChange = (current: number) => {
+    setCurrent(current);
+  };
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
 
@@ -56,7 +61,7 @@ const Cart: CartProps = ({ branding }) => {
   return (
     <Layout branding={branding}>
       <PageHead branding={branding} title={steps[current].title}></PageHead>
-      <Steps current={current} items={items} />
+      <Steps current={current} items={items} onChange={handleStepChange} />
       <div style={contentStyle}>{steps[current].content}</div>
     </Layout>
   );

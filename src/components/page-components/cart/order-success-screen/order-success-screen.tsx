@@ -11,7 +11,7 @@ interface OrderSuccessScreenProps {
 const OrderSuccessScreen = ({}: OrderSuccessScreenProps) => {
   const orderNumber = "123456789";
   const orderNumberLink = (
-    <Link href={`/orders/${orderNumber}`}>#{orderNumber}</Link>
+    <Link href={`/order/${orderNumber}`}>#{orderNumber}</Link>
   );
   return (
     <div className={styles.container}>

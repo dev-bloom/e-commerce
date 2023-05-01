@@ -22,9 +22,9 @@
     }
     &.ant-steps-item-active .ant-steps-item-icon {
       background-color: var(--secondary-color-brighten-30);
-      border-color: var(--secondary-color);
+      border-color: var(--secondary-color-brighten-20);
       .ant-steps-icon {
-        color: var(--primary-color-darken-10);
+        color: var(--secondary-color-brighten-10);
         font-weight: bold;
       }
     }

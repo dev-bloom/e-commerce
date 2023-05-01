@@ -34,16 +34,14 @@ const RelatedCard = ({ card }: Props): ReactElement => {
         <p>
           ${realPrice}
           {!!discount && (
-            <span>
-              <Tag className={styles.dprices} bordered={false} color="green">
-                {discount}% OFF
-              </Tag>
-            </span>
+            <Tag className={styles.dprices} bordered={false} color="green">
+              {discount}% OFF
+            </Tag>
           )}
         </p>
         <Space size={[0, "small"]} wrap>
           {tags.map((tag, i) => (
-            <Tag key={i} bordered={false}>
+            <Tag role="tag" key={i} bordered={false}>
               {tag}
             </Tag>
           ))}

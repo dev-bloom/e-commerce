@@ -1,58 +1,48 @@
-import { Product } from "@/types";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
 import { BaseOptionType } from "antd/es/select";
 import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import React, { useEffect, useState } from "react";
 
 import RelatedCard from "../related-card";
 
-import {
-  addItem,
-  removeItem,
-  selectIsProductInCart,
-  selectProductCountForSlug,
-} from "@/store/cart";
+import { Product } from "@/types";
 
-import { getImageURLFromAsset } from "@/utils/helpers";
+import { defaultValueIfUndefined, getImageURLFromAsset } from "@/utils/helpers";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./product-info.module.scss";
 
 interface ProductInfoProps {
   product: Product;
+  productCount: number;
+  isProductInCart: boolean;
+  onAddToCart: (quantity: number) => void;
+  onRemoveFromCart: () => void;
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({
+  product,
+  productCount,
+  isProductInCart,
+  onAddToCart,
+  onRemoveFromCart,
+}: ProductInfoProps) => {
   const { fields: productFields } = product;
-  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const discountPercent = productFields.discountPercent ?? 0;
   const price =
     productFields.price - (productFields.price * discountPercent) / 100;
 
-  const productCount = useSelector(
-    selectProductCountForSlug(productFields.slug)
-  );
-  const isProductInCart = useSelector(
-    selectIsProductInCart(productFields.slug)
-  );
-
   const productBody = documentToReactComponents(productFields.longDescription);
 
   const handleAddToCart = () => {
     if (quantity === 0) {
-      dispatch(removeItem(product.fields.slug));
+      onRemoveFromCart();
       return;
     }
-    dispatch(
-      addItem({
-        product,
-        quantity,
-      })
-    );
+    onAddToCart(quantity);
   };
 
   useEffect(() => {
@@ -125,28 +115,33 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
                   );
                 })}
               </Space>
-              <br />
-              <br />
-              <Select
-                className={styles.select}
-                value={quantity}
-                onChange={(value) => setQuantity(value)}
-                style={{ width: 60 }}
-                options={
-                  [
-                    isProductInCart ? { value: 0, label: "0" } : false,
-                    { value: 1, label: "1" },
-                    { value: 2, label: "2" },
-                    { value: 3, label: "3" },
-                    { value: 4, label: "4" },
-                    { value: 5, label: "5" },
-                  ].filter(Boolean) as BaseOptionType[]
-                }
-              />
-              <Button type="primary" size={"large"} onClick={handleAddToCart}>
-                {isProductInCart ? "Actualizar carrito" : "Añadir al carrito"}
-                {<ShoppingCartOutlined />}
-              </Button>
+              <div className={styles.productActions}>
+                <Select
+                  className={styles.select}
+                  value={quantity}
+                  onChange={(value) => setQuantity(value)}
+                  style={{ width: 60 }}
+                  options={
+                    [
+                      isProductInCart ? { value: 0, label: "0" } : false,
+                      { value: 1, label: "1" },
+                      { value: 2, label: "2" },
+                      { value: 3, label: "3" },
+                      { value: 4, label: "4" },
+                      { value: 5, label: "5" },
+                    ].filter(Boolean) as BaseOptionType[]
+                  }
+                />
+                <Button
+                  data-testid="add-to-cart-btn"
+                  type="primary"
+                  size={"large"}
+                  onClick={handleAddToCart}
+                >
+                  {isProductInCart ? "Actualizar carrito" : "Añadir al carrito"}
+                  {<ShoppingCartOutlined />}
+                </Button>
+              </div>
             </Card>
           </div>
         </Col>

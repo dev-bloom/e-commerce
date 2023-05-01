@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.card {
+  width: 500px;
+}
+
+.checkIcon {
+  color: var(--primary-color) !important;
+}

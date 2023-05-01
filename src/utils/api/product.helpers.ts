@@ -2,6 +2,15 @@ import { Product, ProductSkeleton } from "@/types";
 import { Asset, EntriesQueries } from "contentful";
 import contentfulClient from "../contentfulClient";
 
+/**
+ * @param skip - The number of products to skip
+ * @returns The products
+ * @description
+ * This method is used to get the products.
+ * It will return an empty array if there are no products.
+ * The products are sorted by the date they were created.
+ * The products are limited to 20 per page.
+ **/
 export const getProducts = async (skip = 0): Promise<Product[]> => {
   const products =
     await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
@@ -23,6 +32,15 @@ export const getProducts = async (skip = 0): Promise<Product[]> => {
   return mappedProducts;
 };
 
+/**
+ * @param slug - The slug of the product to get
+ * @returns The product with the given slug
+ * @description
+ * This method is used to get a product by its slug.
+ * It will return null if there is no product with the given slug.
+ * The product is sorted by the date it was created.
+ * The product has its related products and gallery images populated.
+ **/
 export const getProduct = async (slug: string): Promise<Product | null> => {
   const products =
     await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
@@ -50,6 +68,14 @@ export const getProduct = async (slug: string): Promise<Product | null> => {
   };
 };
 
+/**
+ * @param product - The product to get the first gallery image for
+ * @returns The first gallery image for the product
+ * @description
+ * This method is used to get the first gallery image for a product.
+ * It will return null if there are no gallery images for the product.
+ * The gallery images are sorted by the date they were created.
+ **/
 export const getRelatedProducts = async (
   product: Product
 ): Promise<Product[]> => {
@@ -75,6 +101,14 @@ export const getRelatedProducts = async (
   return relatedProductsWithFirstImage;
 };
 
+/**
+ * @param product - The product to get the gallery images for
+ * @returns The gallery images for the product
+ * @description
+ * This method is used to get the gallery images for a product.
+ * It will return an empty array if there are no gallery images for the product.
+ * The gallery images are sorted by the date they were created.
+ **/
 export const getProductGallery = async (product: Product): Promise<Asset[]> => {
   if (!product.fields.gallery?.length) {
     return [];
@@ -87,6 +121,13 @@ export const getProductGallery = async (product: Product): Promise<Asset[]> => {
   return galleryResponse.items;
 };
 
+/**
+ * @param product - The product to get the first gallery image for
+ * @returns The first gallery image for the product
+ * @description
+ * This method is used to get the first gallery image for a product.
+ * It will return an empty array if there are no gallery images for the product.
+ **/
 export const getFirstProductGalleryImage = async (
   product: Product
 ): Promise<Asset[]> => {

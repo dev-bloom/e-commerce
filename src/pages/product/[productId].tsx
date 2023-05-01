@@ -30,11 +30,10 @@ interface ProductStaticProps {
 }
 
 export async function getStaticProps({
-  params,
+  params: { productId },
 }: {
   params: { productId: string };
 }) {
-  const { productId } = params;
   const product = await getProduct(productId);
 
   if (!product) {
@@ -43,7 +42,10 @@ export async function getStaticProps({
     };
   }
 
-  return getGlobalStaticProps({ product }, { revalidate: 60 });
+  return getGlobalStaticProps<ProductStaticProps>(
+    { product },
+    { revalidate: 60 }
+  );
 }
 
 type ProductIdProps = PageComponentProps<ProductStaticProps>;

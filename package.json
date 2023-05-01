@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:report": "eslint . --format json -o eslint-report.json",
     "test": "jest",
     "test:changed": "jest -o",
     "test:dev": "jest --watch -o"

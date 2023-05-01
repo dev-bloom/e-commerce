@@ -56,6 +56,7 @@ const Cart: CartProps = ({ branding }) => {
     borderRadius: token.borderRadiusLG,
     border: `1px dashed ${token.colorBorder}`,
     marginTop: 16,
+    overflow: "hidden",
   };
 
   return (

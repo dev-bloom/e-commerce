@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/dev-bloom/e-commerce/branch/main/graph/badge.svg?token=OTJMNK1AUF)](https://codecov.io/gh/dev-bloom/e-commerce)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b7d2fe72fe922b02977d/maintainability)](https://codeclimate.com/repos/64502c4b1336c77eda1159e4/maintainability)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

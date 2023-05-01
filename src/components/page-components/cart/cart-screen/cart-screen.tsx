@@ -11,6 +11,8 @@ import {
 import { Product } from "@/types";
 import { PropsWithChildren } from "react";
 
+import styles from "./cart-screen.module.scss";
+
 interface CartScreenProps {
   onNextStep: () => void;
 }
@@ -34,9 +36,11 @@ const CartScreen = ({ onNextStep }: PropsWithChildren<CartScreenProps>) => {
       );
     };
   return (
-    <>
+    <div className={styles.cartScreen}>
       <Divider>
-        <Typography.Text>Resúmen de productos</Typography.Text>
+        <Typography.Title type="secondary" className={styles.title} level={3}>
+          Resúmen de productos
+        </Typography.Title>
       </Divider>
       <List
         itemLayout="vertical"
@@ -108,7 +112,7 @@ const CartScreen = ({ onNextStep }: PropsWithChildren<CartScreenProps>) => {
           );
         }}
       ></List>
-    </>
+    </div>
   );
 };
 

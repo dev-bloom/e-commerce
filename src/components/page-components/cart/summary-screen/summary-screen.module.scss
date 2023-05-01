@@ -1,0 +1,27 @@
+.summaryScreen {
+  background-color: white;
+  padding-top: 1em;
+}
+
+.verticalCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.itemPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.userInfoContainer {
+  padding: 0 1em;
+}
+.ColContainer {
+  padding: 1em;
+}

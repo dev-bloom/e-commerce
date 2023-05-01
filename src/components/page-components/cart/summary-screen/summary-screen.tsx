@@ -7,6 +7,7 @@ import { discountedPrice } from "@/utils/helpers";
 
 import styles from "./summary-screen.module.scss";
 import { DollarOutlined } from "@ant-design/icons";
+import CartHeader from "../cart-header/cart-header";
 
 interface SummaryScreenProps {
   onNextStep: () => void;
@@ -35,6 +36,12 @@ const InfoItem = ({
   </Typography.Text>
 );
 
+const VerticalColDivider = () => (
+  <Col xs={2} className={styles.verticalCenter}>
+    <Divider type="vertical" style={{ height: "100%" }} />
+  </Col>
+);
+
 const SummaryScreen = ({
   onNextStep,
 }: PropsWithChildren<SummaryScreenProps>) => {
@@ -43,11 +50,7 @@ const SummaryScreen = ({
 
   return (
     <div className={styles.summaryScreen}>
-      <Divider>
-        <Typography.Title type="secondary" className={styles.title} level={3}>
-          Resúmen de compra
-        </Typography.Title>
-      </Divider>
+      <CartHeader title="Resúmen de Compra" />
       <Row>
         <Col xs={11} className={styles.userInfoContainer}>
           <Typography.Title level={4}>Envío y Facturación</Typography.Title>
@@ -61,9 +64,7 @@ const SummaryScreen = ({
                 <InfoItem title="Comentarios">{userInfo.comments}</InfoItem>
               </Space>
             </Col>
-            <Col xs={2} className={styles.verticalCenter}>
-              <Divider type="vertical" style={{ height: "100%" }} />
-            </Col>
+            <VerticalColDivider />
             <Col xs={11} className={styles.ColContainer}>
               <Space direction="vertical">
                 <InfoItem title="Email">{userInfo.email}</InfoItem>
@@ -74,9 +75,7 @@ const SummaryScreen = ({
             </Col>
           </Row>
         </Col>
-        <Col xs={2} className={styles.verticalCenter}>
-          <Divider type="vertical" style={{ height: "100%" }} />
-        </Col>
+        <VerticalColDivider />
         <Col xs={11} className={styles.productListContainer}>
           <List
             itemLayout="vertical"

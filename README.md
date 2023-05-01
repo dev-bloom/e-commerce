@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/gh/dev-bloom/e-commerce/branch/main/graph/badge.svg?token=OTJMNK1AUF)](https://codecov.io/gh/dev-bloom/e-commerce)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "test:changed": "jest -o",
+    "test:dev": "jest --watch -o"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",

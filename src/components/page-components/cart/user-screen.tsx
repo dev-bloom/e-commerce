@@ -1,25 +1,23 @@
 import { Button, Form, Row, Col, Input, Select } from "antd";
+import { useState } from "react";
 import type { PropsWithChildren } from "react";
+import { useSelector } from "react-redux";
+
+import { selectUsers } from "@/store/user";
 
 const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 8 },
-  },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 16 },
+    sm: { span: 22 },
   },
 };
 
 const tailFormItemLayout = {
   wrapperCol: {
     xs: {
-      span: 24,
-      offset: 0,
+      offset: 7,
     },
     sm: {
-      span: 16,
       offset: 8,
     },
   },
@@ -30,7 +28,9 @@ interface UserScreenProps {
 }
 
 const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
+  const user = useSelector(selectUsers);
   const [form] = Form.useForm();
+  const [isFormValid, setIsFormValid] = useState(false);
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
@@ -44,14 +44,29 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
     onNextStep();
   };
 
+  const handleValidateFields = async () => {
+    try {
+      await form.validateFields();
+      setIsFormValid(false);
+    } catch (error: any) {
+      console.log("error", error);
+      setIsFormValid(true);
+    }
+  };
+
+  const handleFormValuesChange = () => {
+    handleValidateFields();
+  };
+
   return (
     <Row justify="center" gutter={[10, 12]}>
       <Col>
         <Form
-          {...formItemLayout}
           form={form}
+          {...formItemLayout}
           name="userInfo"
           onFinish={onFinish}
+          onValuesChange={handleFormValuesChange}
           initialValues={{
             prefix: "57",
           }}
@@ -61,6 +76,8 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           <Form.Item
             name="email"
             label="Correo electrónico"
+            initialValue={user.email}
+            labelCol={{ span: 24 }}
             rules={[
               {
                 type: "email",
@@ -78,6 +95,8 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           <Form.Item
             name="names"
             label="Nombres"
+            initialValue={user.name}
+            labelCol={{ span: 24 }}
             rules={[
               {
                 required: true,
@@ -92,6 +111,8 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           <Form.Item
             name="surnames"
             label="Apellidos"
+            initialValue={user.email}
+            labelCol={{ span: 24 }}
             rules={[
               {
                 required: true,
@@ -106,6 +127,8 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           <Form.Item
             name="phone"
             label="Teléfono"
+            initialValue={user.phone}
+            labelCol={{ span: 24 }}
             rules={[
               { required: true, message: "Please input your phone number!" },
             ]}
@@ -114,7 +137,7 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={isFormValid}>
               Continuar
             </Button>
           </Form.Item>

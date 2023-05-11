@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import RelatedCard from "../related-card";
+import RelatedCard from "../../../productCard";
 
 import { Product } from "@/types";
 
@@ -62,21 +62,21 @@ const ProductInfo = ({
             >
               {productFields.gallery?.length
                 ? productFields.gallery?.map((image) => (
-                    <img
-                      key={image.sys.id}
-                      className={styles.carouselImg}
-                      src={getImageURLFromAsset(image)}
-                      alt="product"
-                    />
-                  ))
+                  <img
+                    key={image.sys.id}
+                    className={styles.carouselImg}
+                    src={getImageURLFromAsset(image)}
+                    alt="product"
+                  />
+                ))
                 : [
-                    <img
-                      key="placeholder"
-                      className={styles.carouselImg}
-                      src={getImageURLFromAsset()}
-                      alt="product"
-                    />,
-                  ]}
+                  <img
+                    key="placeholder"
+                    className={styles.carouselImg}
+                    src={getImageURLFromAsset()}
+                    alt="product"
+                  />,
+                ]}
             </Carousel>
           </div>
         </Col>

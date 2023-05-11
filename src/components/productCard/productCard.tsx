@@ -3,7 +3,7 @@ import { Card, Space, Tag } from "antd";
 import Link from "next/link";
 import { getFirstProductImageURL } from "@/utils/helpers";
 import { Product } from "@/types";
-import styles from "./related-card.module.scss";
+import styles from "./productCard.module.scss";
 
 interface Props {
   card: Product;

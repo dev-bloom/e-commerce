@@ -3,13 +3,13 @@ import { Card, Space, Tag } from "antd";
 import Link from "next/link";
 import { getFirstProductImageURL } from "@/utils/helpers";
 import { Product } from "@/types";
-import styles from "./related-card.module.scss";
+import styles from "./product-card.module.scss";
 
 interface Props {
   card: Product;
 }
 
-const RelatedCard = ({ card }: Props): ReactElement => {
+const ProductCard = ({ card }: Props): ReactElement => {
   const {
     fields: { discountPercent: discount, price, slug, name, tags },
   } = card;
@@ -39,7 +39,7 @@ const RelatedCard = ({ card }: Props): ReactElement => {
             </Tag>
           )}
         </p>
-        <Space size={[0, "small"]} wrap>
+        <Space size={[0, "small"]}>
           {tags.map((tag, i) => (
             <Tag role="tag" key={i} bordered={false}>
               {tag}
@@ -51,4 +51,4 @@ const RelatedCard = ({ card }: Props): ReactElement => {
   );
 };
 
-export default RelatedCard;
+export default ProductCard;

@@ -5,7 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
-import RelatedCard from "../related-card";
+import ProductCard from "@/components/product-card";
 
 import { Product } from "@/types";
 
@@ -152,7 +152,7 @@ const ProductInfo = ({
             <h2>Productos relacionados</h2>
           </Col>
           {productFields.relatedProducts.map((card) => (
-            <RelatedCard card={card} key={card.fields.slug} />
+            <ProductCard card={card} key={card.fields.slug} />
           ))}
         </Row>
       )}

@@ -6,10 +6,12 @@ const generateColorVariations = (
   color: string,
   mode: "brighten" | "darken"
 ) => {
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 10; i++) {
     root.style.setProperty(
       `--${name}-${mode}-${i * 10}`,
-      chroma(color)[mode](i).hex()
+      chroma(color)
+        [mode](i / 2)
+        .hex()
     );
   }
 };

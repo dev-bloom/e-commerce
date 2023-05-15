@@ -10,3 +10,8 @@ body {
   margin: 0;
   width: 100%;
 }
+
+.ant-input-group-addon {
+  inset-inline-start: 0 !important;
+  vertical-align: bottom !important;
+}

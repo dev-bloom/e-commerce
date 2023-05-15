@@ -3,13 +3,15 @@ import { Card, Space, Tag } from "antd";
 import Link from "next/link";
 import { getFirstProductImageURL } from "@/utils/helpers";
 import { Product } from "@/types";
+import cn from "classnames";
 import styles from "./product-card.module.scss";
 
 interface Props {
   card: Product;
+  className?: string;
 }
 
-const ProductCard = ({ card }: Props): ReactElement => {
+const ProductCard = ({ card, className }: Props): ReactElement => {
   const {
     fields: { discountPercent: discount, price, slug, name, tags },
   } = card;
@@ -17,10 +19,10 @@ const ProductCard = ({ card }: Props): ReactElement => {
   const realPrice = price - (price * (discount ?? 0)) / 100;
 
   return (
-    <Link key={slug} href={`/product/${slug}`}>
+    <Link className={className} key={slug} href={`/product/${slug}`}>
       <Card
         hoverable
-        className={styles.relatedCard}
+        className={cn(styles.relatedCard)}
         cover={
           <div
             className={styles.cardImg}

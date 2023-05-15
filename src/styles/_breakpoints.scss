@@ -1,28 +1,34 @@
-@import "@/styles/variables";
+$small: 600px;
+$medium: 960px;
+$large: 1200px;
 
+$xs-breakpoint: "xsmall";
+$sm-breakpoint: "small";
+$md-breakpoint: "medium";
+$lg-breakpoint: "large";
 
 @mixin breakpoint($breakpoint) {
-    @if $breakpoint =="xsmall" {
-        @media screen and (max-width: 599px) {
-            @content;
-        }
+  @if $breakpoint == $xs-breakpoint {
+    @media screen and (max-width: 599px) {
+      @content;
     }
+  }
 
-    @if $breakpoint =="small" {
-        @media screen and (min-width: $small) and (max-width: 959px) {
-            @content;
-        }
+  @if $breakpoint == $sm-breakpoint {
+    @media screen and (min-width: $small) and (max-width: 959px) {
+      @content;
     }
+  }
 
-    @if $breakpoint =="medium" {
-        @media screen and (min-width: $medium) and (max-width: 1199px) {
-            @content;
-        }
+  @if $breakpoint == $md-breakpoint {
+    @media screen and (min-width: $medium) and (max-width: 1199px) {
+      @content;
     }
+  }
 
-    @if $breakpoint =="large" {
-        @media screen and (min-width: $large) {
-            @content;
-        }
+  @if $breakpoint == $lg-breakpoint {
+    @media screen and (min-width: $large) {
+      @content;
     }
+  }
 }

@@ -2,6 +2,28 @@ import { Product } from "@/types";
 import { Asset, AssetFile } from "contentful";
 
 /**
+ * Parse a query string
+ * @param query - The query string to parse
+ * @returns {string | undefined} The parsed query string
+ * @example
+ * parseQuery(undefined) // undefined
+ * parseQuery(["test", "query"]) // "test query"
+ * parseQuery("test query") // "test query"
+ **/
+export const parseQuery = (
+  query: string | string[] | undefined
+): string | undefined => {
+  if (!query) {
+    return undefined;
+  }
+  if (Array.isArray(query)) {
+    return query.join(" ");
+  }
+
+  return query;
+};
+
+/**
  * Check if a value is undefined
  * @param value - The value to check
  * @returns {boolean} Whether the value is undefined

@@ -1,8 +1,16 @@
-import { Product, ProductSkeleton } from "@/types";
+import {
+  FeaturedProducts,
+  FeaturedProductsSkeleton,
+  Product,
+  ProductSkeleton,
+} from "@/types";
 import { Asset, EntriesQueries } from "contentful";
 import contentfulClient from "../contentfulClient";
 
+const PAGE_SIZE = 20;
+
 /**
+ * @param query - The query to filter the products by
  * @param skip - The number of products to skip
  * @returns The products
  * @description
@@ -11,12 +19,18 @@ import contentfulClient from "../contentfulClient";
  * The products are sorted by the date they were created.
  * The products are limited to 20 per page.
  **/
-export const getProducts = async (skip = 0): Promise<Product[]> => {
+export const getProducts = async (
+  { query, page }: { query?: string; page?: string } = { page: "1" }
+): Promise<Product[]> => {
+  const skip = page ? (+page - 1) * PAGE_SIZE : 0;
   const products =
     await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
       content_type: "product",
-      limit: 20,
+      limit: PAGE_SIZE,
       skip,
+      ...(query && {
+        query,
+      }),
     });
 
   const mappedProducts = await Promise.all(
@@ -138,3 +152,55 @@ export const getFirstProductGalleryImage = async (
   const firstAsset = await contentfulClient.getAsset(firstImageLink.sys.id);
   return [firstAsset, ...restGallery];
 };
+
+const getFeaturedProductsProductList = async (
+  featuredProducts: FeaturedProducts
+): Promise<Product[]> => {
+  if (!featuredProducts.fields.productList?.length) {
+    return [];
+  }
+  const featuredProductsResponse =
+    await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
+      content_type: "product",
+      "sys.id[in]": featuredProducts.fields.productList
+        .map((featuredProduct) => featuredProduct.sys.id)
+        .join(","),
+    } as EntriesQueries<ProductSkeleton, undefined>);
+  const featuredProductsWithFirstImage = await Promise.all(
+    featuredProductsResponse.items.map(async (featuredProduct) => ({
+      ...featuredProduct,
+      fields: {
+        ...featuredProduct.fields,
+        gallery: await getFirstProductGalleryImage(featuredProduct),
+      },
+    }))
+  );
+  return featuredProductsWithFirstImage;
+};
+
+export const getFeaturedProducts =
+  async (): Promise<FeaturedProducts | null> => {
+    const featuredProductsResponse =
+      await contentfulClient.withoutLinkResolution.getEntries<FeaturedProductsSkeleton>(
+        {
+          content_type: "trendingProducts",
+          limit: 1,
+        }
+      );
+    const [featured] = featuredProductsResponse.items;
+    if (!featured) {
+      return null;
+    }
+
+    const featuredProducts: Product[] = await getFeaturedProductsProductList(
+      featured
+    );
+
+    return {
+      ...featured,
+      fields: {
+        ...featured.fields,
+        productList: featuredProducts,
+      },
+    };
+  };

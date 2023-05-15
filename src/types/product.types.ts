@@ -22,3 +22,15 @@ export type ProductSkeleton = {
 };
 
 export type Product = ContentFulEntry<ProductFields>;
+
+export type FeaturedProductsFields = {
+  productList: ContentFulEntry<ProductFields>[];
+  title: string;
+};
+
+export type FeaturedProductsSkeleton = {
+  fields: FeaturedProductsFields;
+  contentTypeId: "trendingProducts";
+};
+
+export type FeaturedProducts = ContentFulEntry<FeaturedProductsFields>;

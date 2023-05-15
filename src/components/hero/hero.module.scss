@@ -1,4 +1,5 @@
 @import "@/styles/mixins";
+@import "@/styles/breakpoints";
 
 $hero-height: 60vh;
 .hero {
@@ -6,32 +7,115 @@ $hero-height: 60vh;
   justify-content: space-around;
   align-items: center;
   height: $hero-height;
-  background-color: var(--secondary-color-brighten-30);
+  background-color: var(--secondary-color-brighten-60);
+  overflow: hidden;
 }
 
-.card {
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: $hero-height;
+}
+
+.firstSection {
+  background-color: var(--secondary-color-brighten-50);
+  transform: skew(-20deg) scaleX(1.1);
+  transform-origin: top left;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.15);
+  transition: transform 0.5s ease-in-out;
+  width: 60%;
+  overflow: hidden;
+}
+
+.firstSectionCorrection {
+  transform: skew(18deg) scaleX(0.9);
+  transform-origin: top left;
   display: flex;
   align-items: center;
+  flex-direction: column;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 100%;
-  border-radius: 20px;
-  padding: 1em;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
-  text-align: center;
+  height: 100%;
+  @include breakpoint($xs-breakpoint) {
+    transform: scale(0.2);
+  }
+  @include breakpoint($sm-breakpoint) {
+    transform: scale(0.4);
+  }
+  @include breakpoint($md-breakpoint) {
+    transform: scale(0.6);
+  }
+  @include breakpoint($lg-breakpoint) {
+    transform: scale(0.8);
+  }
+}
+.card {
+  transition: transform 0.3s ease-in-out;
+  &:nth-child(2) {
+    z-index: 1;
+    transform: scale(1.1);
+  }
+  &:hover {
+    transform: scale(1.2);
+    z-index: 2;
+  }
+}
+.secondSection {
+  background-color: var(--secondary-color-brighten-60);
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  width: 75%;
+  border-radius: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom: solid 4px var(--secondary-color-brighten-50);
+  transition: all 0.3s ease-in-out;
+  button {
+    background: var(--secondary-color-brighten-50);
+    border-bottom-right-radius: 0 !important;
+    border: none;
+    svg {
+      color: var(--secondary-color-brighten-70);
+    }
+  }
+  input {
+    color: var(--primary-color-brighten-30) !important;
+    font-size: large !important;
+    font-weight: 600;
+  }
+  &::placeholder {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--secondary-color-brighten-40);
+    font-size: large;
+  }
+  &:hover,
+  &:active,
+  &:focus {
+    border-bottom: solid 4px var(--secondary-color-brighten-40) !important;
+    button {
+      background: var(--secondary-color-brighten-40);
+      svg {
+        color: var(--secondary-color-brighten-60);
+      }
+    }
+  }
 }
 
 .title {
   @include impactFont();
   color: var(--primary-color-brighten-20) !important;
-  text-align: center;
-}
-
-.image {
-  max-height: calc(#{$hero-height} - 2em);
-  border-radius: 20px;
-  border: dashed 5px var(--secondary-color-brighten-20);
-}
-
-.content {
-  text-align: left;
-  max-width: 400px;
+  margin: 0 !important;
+  font-size: 4vw !important;
 }

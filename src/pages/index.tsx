@@ -2,9 +2,9 @@
 import ProductList from "@/components/product-list";
 import Layout from "@/components/layout/layout";
 // Types
-import { Product } from "@/types";
+import { FeaturedProducts, Product } from "@/types";
 // Helpers
-import { getProducts } from "@/utils/api/product.helpers";
+import { getFeaturedProducts, getProducts } from "@/utils/api/product.helpers";
 import {
   PageComponentProps,
   getGlobalStaticProps,
@@ -14,19 +14,33 @@ import Hero from "@/components/hero/hero";
 
 interface ProductListPageStaticProps {
   products: Product[];
+  featuredProducts: FeaturedProducts | null;
 }
 
 export async function getStaticProps() {
-  const products = await getProducts();
+  const [products, featuredProducts] = await Promise.all([
+    getProducts(),
+    getFeaturedProducts(),
+  ]);
 
-  return getGlobalStaticProps<ProductListPageStaticProps>({ products });
+  return getGlobalStaticProps<ProductListPageStaticProps>({
+    products,
+    featuredProducts: featuredProducts,
+  });
 }
 
 type HomeProps = PageComponentProps<ProductListPageStaticProps>;
 
-const ProductListPage: HomeProps = ({ products, branding }) => (
+const ProductListPage: HomeProps = ({
+  products,
+  branding,
+  featuredProducts,
+}) => (
   <>
-    <Layout branding={branding} top={<Hero product={products[0]} />}>
+    <Layout
+      branding={branding}
+      top={<Hero featuredProducts={featuredProducts} />}
+    >
       <PageHead branding={branding} title="Home" />
       <ProductList products={products} />
     </Layout>

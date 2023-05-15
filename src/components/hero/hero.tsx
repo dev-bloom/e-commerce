@@ -1,35 +1,60 @@
-import React, { PropsWithChildren } from "react";
-import { Button, Card, Typography } from "antd";
-import { Product } from "@/types";
-import { getFirstProductImageURL } from "@/utils/helpers";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import Link from "next/link";
+import React, { PropsWithChildren, useMemo } from "react";
+import { Input, Typography } from "antd";
+import cn from "classnames";
+import { FeaturedProducts } from "@/types";
+import ProductCard from "../product-card/product-card";
 import styles from "./hero.module.scss";
-
-const { Title, Paragraph } = Typography;
+import { useRouter } from "next/router";
 
 type HeroProps = PropsWithChildren<{
-  product: Product;
+  featuredProducts: FeaturedProducts | null;
 }>;
 
-const Hero = ({ product }: HeroProps) => {
-  const image = getFirstProductImageURL(product);
-  const { name, longDescription, slug } = product.fields;
-  const ProductBody = documentToReactComponents(longDescription);
+const Hero = ({ featuredProducts }: HeroProps) => {
+  const router = useRouter();
+  const shuffledProductList = useMemo(() => {
+    if (!featuredProducts?.fields.productList) {
+      return [];
+    }
+    const [firstProduct, secondProduct, thirdProduct] =
+      featuredProducts.fields.productList;
+    return [thirdProduct, firstProduct, secondProduct];
+  }, [featuredProducts]);
+
+  const handleSearch = (value: string) => {
+    router.push(`/products?query=${value}`);
+    console.log(value);
+  };
+
   return (
     <div className={styles.hero}>
-      <img className={styles.image} src={image} alt={name} />
-      <div className={styles.content}>
-        <Title className={styles.title}>{name}</Title>
-        <Card className={styles.card}>
-          <Paragraph>{ProductBody}</Paragraph>
-          <Link href={`/product/${slug}`}>
-            <Button type="primary" size="large">
-              Ver más
-            </Button>
-          </Link>
-        </Card>
-      </div>
+      <section className={cn(styles.section, styles.firstSection)}>
+        <div className={cn(styles.firstSectionCorrection)}>
+          <div className={styles.cardsContainer}>
+            {shuffledProductList.map((product) => (
+              <ProductCard
+                key={product.sys.id}
+                className={styles.card}
+                card={product}
+              />
+            ))}
+          </div>
+
+          <Typography.Title className={styles.title} level={1}>
+            {featuredProducts?.fields.title}
+          </Typography.Title>
+        </div>
+      </section>
+      <section className={cn(styles.section, styles.secondSection)}>
+        <Input.Search
+          allowClear
+          className={styles.input}
+          placeholder="Buscas algo?"
+          bordered={false}
+          size="large"
+          onSearch={handleSearch}
+        />
+      </section>
     </div>
   );
 };

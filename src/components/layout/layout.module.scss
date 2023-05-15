@@ -1,14 +1,20 @@
 @import "@/styles/mixins";
 
 .layoutHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: sticky;
   top: 0;
   z-index: 10;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: white;
+  transition: box-shadow 0.25s ease-in-out;
+}
+
+.layoutBody {
+  padding: 0 50px;
+  min-height: 85vh;
 }
 
 .branding {
@@ -39,6 +45,15 @@
   color: var(--tertiary-color-brighten-10);
 }
 
-.layoutBody {
-  min-height: calc(100vh - 8em);
+.footer {
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 0 0.5em 0.25em rgba(0, 0, 0, 0);
+  transition: box-shadow 0.25s ease-in-out;
+  text-align: right;
+}
+
+.hasScrolled {
+  box-shadow: 0 0 0.5em 0.25em rgba(0, 0, 0, 0.15);
 }

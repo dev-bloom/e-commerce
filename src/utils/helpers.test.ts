@@ -5,8 +5,28 @@ import {
   getFirstProductImageURL,
   getImageURLFromAsset,
   isUndefined,
+  parseQuery,
 } from "./helpers";
 import { getMockAssetImage, getMockProduct } from "./test.helpers";
+
+describe("parseQuery", () => {
+  it("returns undefined when the query is undefined", () => {
+    const result = parseQuery(undefined);
+    expect(result).toBe(undefined);
+  });
+
+  it("returns the query when the query is a string", () => {
+    const query = "test query";
+    const result = parseQuery(query);
+    expect(result).toBe(query);
+  });
+
+  it("returns the query when the query is an array", () => {
+    const query = ["test", "query"];
+    const result = parseQuery(query);
+    expect(result).toBe("test query");
+  });
+});
 
 describe("isUndefined", () => {
   it("returns true when the value is undefined", () => {

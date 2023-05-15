@@ -24,4 +24,5 @@ const cartSlice = createSlice({
 
 export * from "./cart.actions";
 export * from "./cart.selectors";
+export * from "./cart.types";
 export default cartSlice.reducer;

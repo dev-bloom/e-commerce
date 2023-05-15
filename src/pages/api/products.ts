@@ -6,8 +6,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Product[]>
 ) {
-  const skip = +(req.query.skip ?? 0);
-  const products = await getProducts(skip);
+  const page = req.query.page ? Number(req.query.page) : 1;
+  const products = await getProducts({ page });
 
   res.status(200).json(products);
 }

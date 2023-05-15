@@ -20,9 +20,9 @@ const PAGE_SIZE = 20;
  * The products are limited to 20 per page.
  **/
 export const getProducts = async (
-  { query, page }: { query?: string; page?: number } = { page: 1 }
+  { query, page }: { query?: string; page?: string } = { page: "1" }
 ): Promise<Product[]> => {
-  const skip = page ? (page - 1) * PAGE_SIZE : 0;
+  const skip = page ? (+page - 1) * PAGE_SIZE : 0;
   const products =
     await contentfulClient.withoutLinkResolution.getEntries<ProductSkeleton>({
       content_type: "product",

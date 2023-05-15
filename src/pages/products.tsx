@@ -14,6 +14,7 @@ import PageHead from "@/components/page-head/page-head";
 import { GetServerSidePropsContext } from "next";
 import { Button, Result } from "antd";
 import { useRouter } from "next/router";
+import { parseQuery } from "@/utils/helpers";
 
 interface ProductListPageServerProps {
   products: Product[];
@@ -23,14 +24,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const {
     query: { query, page },
   } = context;
-  const parsedQuery = query
-    ? Array.isArray(query)
-      ? query[0]
-      : query
-    : undefined;
-  const parsedPage = page
-    ? Number(Array.isArray(page) ? page[0] : page)
-    : undefined;
+  const parsedQuery = parseQuery(query);
+  const parsedPage = parseQuery(page);
   const products = await getProducts({ query: parsedQuery, page: parsedPage });
 
   return getGlobalServerSideProps<ProductListPageServerProps>({ products });

@@ -1,5 +1,11 @@
 import { getMockProduct } from "@/utils/test.helpers";
-import { selectCartItems, selectTotalProducts } from "./cart.selectors";
+import {
+  selectCartItems,
+  selectIsProductInCart,
+  selectProductCountForSlug,
+  selectTotalPrice,
+  selectTotalProducts,
+} from "./cart.selectors";
 
 describe("cart.selectors.ts", () => {
   describe("selectCartItems", () => {
@@ -42,23 +48,29 @@ describe("cart.selectors.ts", () => {
   });
   describe("selectTotalPrice", () => {
     it("should return the total price of all products in the cart", () => {
+      const [mockProduct1, mockProduct2] = [
+        getMockProduct({ slug: "test-slug", price: 5 }),
+        getMockProduct({ slug: "test-slug-2", price: 11 }),
+      ];
       const mockState = {
         cart: {
           items: [
             {
-              product: getMockProduct({ slug: "test-slug" }),
+              product: mockProduct1,
               quantity: 1,
             },
             {
-              product: getMockProduct({ slug: "test-slug-2" }),
+              product: mockProduct2,
               quantity: 2,
             },
           ],
         },
       };
-      const result = selectTotalProducts(mockState);
+      const result = selectTotalPrice(mockState);
+      const totalPrice = 5 + 11 + 11;
+      const discount = 0.1;
 
-      expect(result).toEqual(3);
+      expect(result).toEqual(totalPrice * (1 - discount));
     });
   });
   describe("selectProductCountForSlug", () => {
@@ -77,11 +89,12 @@ describe("cart.selectors.ts", () => {
           ],
         },
       };
-      const result = selectTotalProducts(mockState);
+      const result = selectProductCountForSlug("test-slug-2")(mockState);
 
-      expect(result).toEqual(3);
+      expect(result).toEqual(2);
     });
   });
+
   describe("selectIsProductInCart", () => {
     it("should return true if the product is in the cart", () => {
       const mockState = {
@@ -98,9 +111,9 @@ describe("cart.selectors.ts", () => {
           ],
         },
       };
-      const result = selectTotalProducts(mockState);
+      const result = selectIsProductInCart("test-slug-2")(mockState);
 
-      expect(result).toEqual(3);
+      expect(result).toBeTruthy();
     });
   });
 });

@@ -11,12 +11,12 @@ export default function ProductList({
   products: Product[];
 }>) {
   return (
-    <Row gutter={[16, 16]}>
+    <Row gutter={[16, 16]} justify="center">
       {products.map((product) => {
         const { fields: productFields } = product;
 
         return (
-          <Col key={productFields.name} xs={24} sm={12} md={8} lg={6} xl={4}>
+          <Col key={productFields.name} xs={24} sm={12} md={8} lg={6}>
             <ProductCard card={product} />
           </Col>
         );

@@ -2,7 +2,7 @@ import { Card, Space, Tag } from "antd";
 import cn from "classnames";
 import Link from "next/link";
 import type { ReactElement } from "react";
-import React from "react";
+import React, { useMemo } from "react";
 
 import type { Product } from "@/types";
 import { getFirstProductImageURL } from "@/utils/helpers";
@@ -14,10 +14,15 @@ interface Props {
   className?: string;
 }
 
+const visibleTags = 2;
+
 const ProductCard = ({ card, className }: Props): ReactElement => {
   const {
     fields: { discountPercent: discount, price, slug, name, tags },
   } = card;
+
+  const hasMoreTags = tags.length > visibleTags;
+  const tagList = useMemo(() => tags.slice(0, visibleTags), [tags]);
 
   const realPrice = price - (price * (discount ?? 0)) / 100;
 
@@ -44,12 +49,17 @@ const ProductCard = ({ card, className }: Props): ReactElement => {
             </Tag>
           )}
         </p>
-        <Space size={[0, "small"]}>
-          {tags.map((tag, i) => (
+        <Space size={[0, "small"]} className={styles.tagList}>
+          {tagList.map((tag, i) => (
             <Tag role="tag" key={i} bordered={false}>
               {tag}
             </Tag>
           ))}
+          {hasMoreTags && (
+            <Tag role="tag" key="more" bordered={false}>
+              +{tags.length - visibleTags}
+            </Tag>
+          )}
         </Space>
       </Card>
     </Link>

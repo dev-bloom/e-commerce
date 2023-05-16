@@ -1,19 +1,19 @@
 // Components
-import ProductList from "@/components/product-list";
+import { Button, Result } from "antd";
+import { GetServerSidePropsContext } from "next";
+import { useRouter } from "next/router";
+
 import Layout from "@/components/layout/layout";
+import PageHead from "@/components/page-head/page-head";
+import ProductList from "@/components/product-list";
 // Types
 import { Product } from "@/types";
 // Helpers
-import { getProducts } from "@/utils/api/product.helpers";
 import {
   PageComponentProps,
   getGlobalServerSideProps,
-  getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
-import PageHead from "@/components/page-head/page-head";
-import { GetServerSidePropsContext } from "next";
-import { Button, Result } from "antd";
-import { useRouter } from "next/router";
+import { getProducts } from "@/utils/api/product.helpers";
 import { parseQuery } from "@/utils/helpers";
 
 interface ProductListPageServerProps {

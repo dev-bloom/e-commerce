@@ -1,15 +1,16 @@
-import { useState } from "react";
 import { Steps, theme } from "antd";
+import { useState } from "react";
+
 import Layout from "@/components/layout/layout";
 import CartScreen from "@/components/page-components/cart/cart-screen";
-import UserScreen from "@/components/page-components/cart/user-screen";
+import OrderSuccessScreen from "@/components/page-components/cart/order-success-screen/order-success-screen";
 import SummaryScreen from "@/components/page-components/cart/summary-screen";
+import UserScreen from "@/components/page-components/cart/user-screen";
+import PageHead from "@/components/page-head/page-head";
 import {
   PageComponentProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
-import PageHead from "@/components/page-head/page-head";
-import OrderSuccessScreen from "@/components/page-components/cart/order-success-screen/order-success-screen";
 
 export async function getStaticProps() {
   return getGlobalStaticProps();

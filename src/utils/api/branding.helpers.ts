@@ -1,6 +1,6 @@
-import contentfulClient from "../contentfulClient";
-
 import { Branding, BrandingSkeleton } from "@/types";
+
+import contentfulClient from "../contentfulClient";
 
 let brandingCache: Branding | null = null;
 

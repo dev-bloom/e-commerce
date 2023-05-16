@@ -1,12 +1,11 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import { PropsWithChildren } from "react";
 import "@testing-library/jest-dom/extend-expect";
 
-import PageHead from "./page-head";
-
+import { Branding } from "@/types";
 import { getMockBranding } from "@/utils/test.helpers";
 
-import { Branding } from "@/types";
-import { PropsWithChildren } from "react";
+import PageHead from "./page-head";
 
 jest.mock("next/head", () => {
   return {

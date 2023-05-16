@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import RelatedCard from "./product-card";
+
 import { getMockProduct } from "@/utils/test.helpers";
+
+import RelatedCard from "./product-card";
 
 const mockProduct = getMockProduct({
   discountPercent: 10,

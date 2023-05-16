@@ -1,26 +1,23 @@
-import React from "react";
 import { useRouter } from "next/router";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import PageHead from "@/components/page-head/page-head";
 import Layout from "@/components/layout/layout";
 import Loading from "@/components/loading/loading";
 import ProductInfo from "@/components/page-components/detail-screen/product-info/product-info";
-
-import { Product } from "@/types";
-
-import { getProduct, getProducts } from "@/utils/api/product.helpers";
-import {
-  PageComponentProps,
-  getGlobalStaticProps,
-} from "@/utils/api/api.helpers";
-
+import PageHead from "@/components/page-head/page-head";
 import {
   addItem,
   removeItem,
   selectIsProductInCart,
   selectProductCountForSlug,
 } from "@/store/cart";
+import { Product } from "@/types";
+import {
+  PageComponentProps,
+  getGlobalStaticProps,
+} from "@/utils/api/api.helpers";
+import { getProduct, getProducts } from "@/utils/api/product.helpers";
 
 export async function getStaticPaths() {
   const products = await getProducts();

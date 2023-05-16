@@ -1,13 +1,14 @@
-import { PropsWithChildren } from "react";
+import { DollarOutlined } from "@ant-design/icons";
 import { Button, List, Divider, Row, Col, Typography, Space } from "antd";
+import { PropsWithChildren } from "react";
 import { useSelector } from "react-redux";
 
 import { CartItem, selectCartItems, selectTotalPrice } from "@/store/cart";
 import { discountedPrice } from "@/utils/helpers";
 
-import styles from "./summary-screen.module.scss";
-import { DollarOutlined } from "@ant-design/icons";
 import CartHeader from "../cart-header/cart-header";
+
+import styles from "./summary-screen.module.scss";
 
 interface SummaryScreenProps {
   onNextStep: () => void;

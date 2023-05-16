@@ -1,8 +1,8 @@
-import { Card, Result, Button } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
+import { Card, Result, Button } from "antd";
+import Link from "next/link";
 
 import styles from "./order-success-screen.module.scss";
-import Link from "next/link";
 
 interface OrderSuccessScreenProps {
   onNextStep: () => void;

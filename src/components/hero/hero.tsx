@@ -1,10 +1,13 @@
-import React, { PropsWithChildren, useMemo } from "react";
 import { Input, Typography } from "antd";
 import cn from "classnames";
-import { FeaturedProducts } from "@/types";
-import ProductCard from "../product-card/product-card";
-import styles from "./hero.module.scss";
 import { useRouter } from "next/router";
+import React, { PropsWithChildren, useMemo } from "react";
+
+import { FeaturedProducts } from "@/types";
+
+import ProductCard from "../product-card/product-card";
+
+import styles from "./hero.module.scss";
 
 type HeroProps = PropsWithChildren<{
   featuredProducts: FeaturedProducts | null;

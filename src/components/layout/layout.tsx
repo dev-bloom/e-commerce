@@ -1,17 +1,19 @@
+import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Layout as ANTDLayout } from "antd";
+import cn from "classnames";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 import { FC, ReactNode, useEffect, useState } from "react";
 import { PropsWithChildren } from "react";
-import Link from "next/link";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import { useSelector } from "react-redux";
+
 import { selectTotalProducts } from "@/store/cart";
 import { Branding } from "@/types";
-import { getImageURLFromAsset } from "@/utils/helpers";
-import Image from "next/image";
-import styles from "./layout.module.scss";
 import { setColors } from "@/utils/colors";
-import Head from "next/head";
-import cn from "classnames";
+import { getImageURLFromAsset } from "@/utils/helpers";
+
+import styles from "./layout.module.scss";
 
 interface LayoutProps {
   branding: Branding;

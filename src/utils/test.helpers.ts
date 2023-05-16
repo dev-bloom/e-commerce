@@ -2,6 +2,7 @@ import { BLOCKS, Document } from "@contentful/rich-text-types";
 import { Asset, EntrySys, Metadata } from "contentful";
 
 import { Branding, BrandingFields, Product, ProductFields } from "@/types";
+
 import { defaultValueIfUndefined } from "./helpers";
 
 export const getMockDocument = (values: string[] = []): Document => ({

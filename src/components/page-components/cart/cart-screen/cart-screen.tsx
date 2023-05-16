@@ -1,6 +1,7 @@
-import { discountedPrice, getFirstProductImageURL } from "@/utils/helpers";
-import { Button, List, Select, Typography, Divider, Row, Col } from "antd";
+import { Button, List, Select, Row, Col } from "antd";
+import { PropsWithChildren } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
   CartItem,
   removeItem,
@@ -9,10 +10,11 @@ import {
   updateItemQuantity,
 } from "@/store/cart";
 import { Product } from "@/types";
-import { PropsWithChildren } from "react";
+import { discountedPrice, getFirstProductImageURL } from "@/utils/helpers";
+
+import CartHeader from "../cart-header/cart-header";
 
 import styles from "./cart-screen.module.scss";
-import CartHeader from "../cart-header/cart-header";
 
 interface CartScreenProps {
   onNextStep: () => void;

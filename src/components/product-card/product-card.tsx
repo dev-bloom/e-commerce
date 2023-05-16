@@ -1,9 +1,11 @@
-import React, { ReactElement } from "react";
 import { Card, Space, Tag } from "antd";
-import Link from "next/link";
-import { getFirstProductImageURL } from "@/utils/helpers";
-import { Product } from "@/types";
 import cn from "classnames";
+import Link from "next/link";
+import React, { ReactElement } from "react";
+
+import { Product } from "@/types";
+import { getFirstProductImageURL } from "@/utils/helpers";
+
 import styles from "./product-card.module.scss";
 
 interface Props {

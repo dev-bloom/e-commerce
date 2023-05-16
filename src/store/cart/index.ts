@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CartState } from "./cart.types";
+
 import {
   addItemReducer,
   clearCartReducer,
   removeItemReducer,
   updateItemQuantityReducer,
 } from "./cart.reducer";
+import { CartState } from "./cart.types";
 
 const initialState: CartState = {
   items: [],

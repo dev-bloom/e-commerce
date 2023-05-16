@@ -1,10 +1,12 @@
+import { Asset, EntriesQueries } from "contentful";
+
 import {
   FeaturedProducts,
   FeaturedProductsSkeleton,
   Product,
   ProductSkeleton,
 } from "@/types";
-import { Asset, EntriesQueries } from "contentful";
+
 import contentfulClient from "../contentfulClient";
 
 const PAGE_SIZE = 20;

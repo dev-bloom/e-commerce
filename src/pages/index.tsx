@@ -1,16 +1,16 @@
 // Components
-import ProductList from "@/components/product-list";
+import Hero from "@/components/hero/hero";
 import Layout from "@/components/layout/layout";
+import PageHead from "@/components/page-head/page-head";
+import ProductList from "@/components/product-list";
 // Types
 import { FeaturedProducts, Product } from "@/types";
 // Helpers
-import { getFeaturedProducts, getProducts } from "@/utils/api/product.helpers";
 import {
   PageComponentProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
-import PageHead from "@/components/page-head/page-head";
-import Hero from "@/components/hero/hero";
+import { getFeaturedProducts, getProducts } from "@/utils/api/product.helpers";
 
 interface ProductListPageStaticProps {
   products: Product[];

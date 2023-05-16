@@ -1,4 +1,5 @@
 import { Asset } from "contentful";
+
 import { ContentFulEntry } from "./global.types";
 
 export type BrandingFields = {

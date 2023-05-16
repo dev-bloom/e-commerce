@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
-import { createWrapper, HYDRATE } from "next-redux-wrapper";
-import storage from "./storage"; // Default: localStorage if web, AsyncStorage if React Native
+
 import cart from "./cart";
+import storage from "./storage"; // Default: localStorage if web, AsyncStorage if React Native
 
 export const rootReducer = combineReducers({
   cart,

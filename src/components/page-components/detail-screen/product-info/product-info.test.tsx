@@ -1,11 +1,10 @@
+import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
-import { render, screen, fireEvent, act } from "@testing-library/react";
-
-import ProductInfo from "./product-info";
-
-import { getMockProduct } from "@/utils/test.helpers";
 
 import { Product } from "@/types";
+import { getMockProduct } from "@/utils/test.helpers";
+
+import ProductInfo from "./product-info";
 
 describe("ProductInfo", () => {
   let mockProduct: Product;
@@ -19,7 +18,7 @@ describe("ProductInfo", () => {
       slug: "test-product",
       tags: ["tag1", "tag2"],
     });
-    window.matchMedia = jest.fn().mockImplementation((query) => ({
+    window.matchMedia = jest.fn().mockImplementation(() => ({
       matches: false,
       addListener: jest.fn(),
       removeListener: jest.fn(),

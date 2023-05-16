@@ -1,11 +1,13 @@
+import { Button, Result } from "antd";
+import { useRouter } from "next/router";
+
 import Layout from "@/components/layout/layout";
 import PageHead from "@/components/page-head/page-head";
 import {
   PageComponentProps,
   getGlobalStaticProps,
 } from "@/utils/api/api.helpers";
-import { Button, Result } from "antd";
-import { useRouter } from "next/router";
+
 import styles from "./404.module.scss";
 
 export async function getStaticProps() {

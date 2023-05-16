@@ -1,7 +1,8 @@
 import { EntriesQueries } from "contentful";
 
-import contentfulClient from "../contentfulClient";
 import { Order, OrderSkeleton } from "@/types";
+
+import contentfulClient from "../contentfulClient";
 
 /**
  * @param order - The order to get the order items for

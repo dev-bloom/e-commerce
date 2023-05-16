@@ -2,9 +2,7 @@ import { useRouter } from "next/router";
 
 import Layout from "@/components/layout/layout";
 import PageHead from "@/components/page-head/page-head";
-
 import { Order } from "@/types";
-
 import {
   PageComponentProps,
   getGlobalServerSideProps,

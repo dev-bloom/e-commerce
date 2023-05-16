@@ -1,10 +1,10 @@
-import { GetServerSidePropsResult, GetStaticPropsResult } from "next";
 import { hoursToSeconds } from "date-fns";
-
-import { getBranding } from "./branding.helpers";
+import { GetServerSidePropsResult, GetStaticPropsResult } from "next";
+import { FC, PropsWithChildren } from "react";
 
 import { Branding } from "@/types";
-import { FC, PropsWithChildren } from "react";
+
+import { getBranding } from "./branding.helpers";
 
 const defaultRevalidateDays = 7;
 

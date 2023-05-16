@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
-import { BaseOptionType } from "antd/es/select";
-import { Carousel } from "react-responsive-carousel";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
+import { BaseOptionType } from "antd/es/select";
+import React, { useEffect, useState } from "react";
+import { Carousel } from "react-responsive-carousel";
 
 import ProductCard from "@/components/product-card";
-
 import { Product } from "@/types";
-
-import { defaultValueIfUndefined, getImageURLFromAsset } from "@/utils/helpers";
+import { getImageURLFromAsset } from "@/utils/helpers";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import styles from "./product-info.module.scss";
@@ -18,7 +16,7 @@ interface ProductInfoProps {
   product: Product;
   productCount: number;
   isProductInCart: boolean;
-  onAddToCart: (quantity: number) => void;
+  onAddToCart: (_quantity: number) => void;
   onRemoveFromCart: () => void;
 }
 

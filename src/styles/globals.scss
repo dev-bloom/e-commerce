@@ -1,9 +1,76 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+/* stylelint-disable selector-class-pattern */
+@import "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap";
 @import "./antd-overrides";
 
+:root {
+  --secondary-color-brighten-10: transparent;
+  --secondary-color-brighten-20: transparent;
+  --secondary-color-brighten-30: transparent;
+  --secondary-color-brighten-40: transparent;
+  --secondary-color-brighten-50: transparent;
+  --secondary-color-brighten-60: transparent;
+  --secondary-color-brighten-70: transparent;
+  --secondary-color-brighten-80: transparent;
+  --secondary-color-brighten-90: transparent;
+  --secondary-color-brighten-100: transparent;
+  --secondary-color-darken-10: transparent;
+  --secondary-color-darken-20: transparent;
+  --secondary-color-darken-30: transparent;
+  --secondary-color-darken-40: transparent;
+  --secondary-color-darken-50: transparent;
+  --secondary-color-darken-60: transparent;
+  --secondary-color-darken-70: transparent;
+  --secondary-color-darken-80: transparent;
+  --secondary-color-darken-90: transparent;
+  --secondary-color-darken-100: transparent;
+  --secondary-color: transparent;
+  --primary-color-brighten-10: transparent;
+  --primary-color-brighten-20: transparent;
+  --primary-color-brighten-30: transparent;
+  --primary-color-brighten-40: transparent;
+  --primary-color-brighten-50: transparent;
+  --primary-color-brighten-60: transparent;
+  --primary-color-brighten-70: transparent;
+  --primary-color-brighten-80: transparent;
+  --primary-color-brighten-90: transparent;
+  --primary-color-brighten-100: transparent;
+  --primary-color-darken-10: transparent;
+  --primary-color-darken-20: transparent;
+  --primary-color-darken-30: transparent;
+  --primary-color-darken-40: transparent;
+  --primary-color-darken-50: transparent;
+  --primary-color-darken-60: transparent;
+  --primary-color-darken-70: transparent;
+  --primary-color-darken-80: transparent;
+  --primary-color-darken-90: transparent;
+  --primary-color-darken-100: transparent;
+  --primary-color: transparent;
+  --tertiary-color-brighten-10: transparent;
+  --tertiary-color-brighten-20: transparent;
+  --tertiary-color-brighten-30: transparent;
+  --tertiary-color-brighten-40: transparent;
+  --tertiary-color-brighten-50: transparent;
+  --tertiary-color-brighten-60: transparent;
+  --tertiary-color-brighten-70: transparent;
+  --tertiary-color-brighten-80: transparent;
+  --tertiary-color-brighten-90: transparent;
+  --tertiary-color-brighten-100: transparent;
+  --tertiary-color-darken-10: transparent;
+  --tertiary-color-darken-20: transparent;
+  --tertiary-color-darken-30: transparent;
+  --tertiary-color-darken-40: transparent;
+  --tertiary-color-darken-50: transparent;
+  --tertiary-color-darken-60: transparent;
+  --tertiary-color-darken-70: transparent;
+  --tertiary-color-darken-80: transparent;
+  --tertiary-color-darken-90: transparent;
+  --tertiary-color-darken-100: transparent;
+  --tertiary-color: transparent;
+}
+
 html {
-  width: 100vw;
   overflow-x: hidden;
+  width: 100vw;
 }
 
 body {

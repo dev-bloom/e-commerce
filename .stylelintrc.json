@@ -1,0 +1,13 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-css-modules"],
+  "plugins": ["stylelint-scss", "stylelint-order"],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "order/properties-alphabetical-order": true,
+    "selector-max-specificity": "0,4,0",
+    "selector-class-pattern": "^[a-zA-Z0-9]*$",
+    "scss/at-mixin-pattern": "^[a-zA-Z0-9]+$",
+    "color-function-notation": null
+  }
+}

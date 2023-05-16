@@ -4,20 +4,22 @@
 }
 
 .verticalCenter {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .itemPrice {
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
   height: 100%;
+  justify-content: center;
 }
+
 .userInfoContainer {
   padding: 0 1em;
 }
+
 .ColContainer {
   padding: 1em;
 }

@@ -1,10 +1,10 @@
 .nav {
-  height: 60px;
-  width: 100%;
+  align-items: center;
   border-bottom: 1px solid #eceff1;
   display: flex;
+  height: 60px;
   justify-content: space-between;
-  align-items: center;
+  width: 100%;
 }
 
 .icons {
@@ -37,10 +37,10 @@
 }
 
 .related {
-  display: flex;
-  justify-content: flex-start;
-  gap: 30px;
   align-items: center;
+  display: flex;
+  gap: 30px;
+  justify-content: flex-start;
 }
 
 .dprices {
@@ -48,20 +48,20 @@
 }
 
 .carouselImg {
-  width: 100%;
   color: #fff;
   height: 550px;
-  text-align: center;
   object-fit: cover;
+  text-align: center;
+  width: 100%;
 }
 
 .cardImg {
-  width: 100%;
-  height: 250px;
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 10px;
+  height: 250px;
+  width: 100%;
 }
 
 .relatedCard {

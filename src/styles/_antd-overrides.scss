@@ -1,3 +1,11 @@
+/* stylelint-disable selector-max-specificity */
+/* stylelint-disable selector-class-pattern */
+
+.ant-steps-item-finish .ant-steps-item-icon {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
 .ant-btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color-darken-10);
@@ -15,27 +23,21 @@
     &.ant-steps-item-finish .ant-steps-item-icon {
       background-color: var(--primary-color-brighten-20);
       border-color: var(--primary-color);
+
       .ant-steps-icon {
         color: var(--primary-color-darken-10);
         font-weight: bold;
       }
     }
+
     &.ant-steps-item-active .ant-steps-item-icon {
       background-color: var(--secondary-color-brighten-30);
       border-color: var(--secondary-color-brighten-20);
+
       .ant-steps-icon {
         color: var(--secondary-color-brighten-10);
         font-weight: bold;
       }
     }
   }
-}
-
-.ant-steps-item-finish .ant-steps-item-icon {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
-  color: red;
 }

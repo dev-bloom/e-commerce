@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { getProducts } from "@/utils/api/product.helpers";
 import { parseQuery } from "@/utils/helpers";
 

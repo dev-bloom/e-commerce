@@ -1,6 +1,6 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
-import { CartItem, CartState } from "./cart.types";
+import type { CartItem, CartState } from "./cart.types";
 
 export const addItemReducer = (
   state: CartState,
@@ -11,7 +11,7 @@ export const addItemReducer = (
   );
 
   if (itemIndex !== -1) {
-    state.items[itemIndex].quantity = action.payload.quantity;
+    state.items[+itemIndex].quantity = action.payload.quantity;
   } else {
     state.items.push(action.payload);
   }
@@ -35,7 +35,7 @@ export const updateItemQuantityReducer = (
   );
 
   if (itemIndex !== -1) {
-    state.items[itemIndex].quantity = action.payload.quantity;
+    state.items[+itemIndex].quantity = action.payload.quantity;
   }
 };
 

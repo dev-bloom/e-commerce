@@ -1,4 +1,4 @@
-import { Branding, BrandingSkeleton } from "@/types";
+import type { Branding, BrandingSkeleton } from "@/types";
 
 import contentfulClient from "../contentfulClient";
 
@@ -11,7 +11,9 @@ let brandingCache: Branding | null = null;
  * It will return null if there is no branding.
  **/
 export const getBranding = async (): Promise<Branding> => {
-  if (brandingCache) return brandingCache;
+  if (brandingCache) {
+    return brandingCache;
+  }
   const response = await contentfulClient.getEntries<BrandingSkeleton>({
     content_type: "branding",
     limit: 1,

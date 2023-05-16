@@ -1,15 +1,15 @@
 import { Button, List, Select, Row, Col } from "antd";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+import type { CartItem } from "@/store/cart";
 import {
-  CartItem,
   removeItem,
   selectCartItems,
   selectTotalPrice,
   updateItemQuantity,
 } from "@/store/cart";
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { discountedPrice, getFirstProductImageURL } from "@/utils/helpers";
 
 import CartHeader from "../cart-header/cart-header";

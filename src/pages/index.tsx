@@ -4,12 +4,10 @@ import Layout from "@/components/layout/layout";
 import PageHead from "@/components/page-head/page-head";
 import ProductList from "@/components/product-list";
 // Types
-import { FeaturedProducts, Product } from "@/types";
+import type { FeaturedProducts, Product } from "@/types";
 // Helpers
-import {
-  PageComponentProps,
-  getGlobalStaticProps,
-} from "@/utils/api/api.helpers";
+import type { PageComponentProps } from "@/utils/api/api.helpers";
+import { getGlobalStaticProps } from "@/utils/api/api.helpers";
 import { getFeaturedProducts, getProducts } from "@/utils/api/product.helpers";
 
 interface ProductListPageStaticProps {

@@ -2,9 +2,14 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:security/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "next"
   ],
-  "plugins": ["import", "react", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import", "react", "prettier", "security"],
   "rules": {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
@@ -28,9 +33,14 @@
     ],
     "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "eqeqeq": "error",
+    "curly": "error",
+    "no-eval": "error",
+    "import/no-unresolved": "error",
+    "import/named": "error",
     "prefer-const": "error",
     "no-var": "error",
-    "prefer-arrow-callback": "error"
+    "prefer-arrow-callback": "error",
+    "@typescript-eslint/consistent-type-imports": "warn"
   },
   "settings": {
     "react": {

@@ -1,8 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import "@testing-library/jest-dom/extend-expect";
 
-import { Branding } from "@/types";
+import type { Branding } from "@/types";
 import { getMockBranding } from "@/utils/test.helpers";
 
 import PageHead from "./page-head";

@@ -1,18 +1,16 @@
 // Components
 import { Button, Result } from "antd";
-import { GetServerSidePropsContext } from "next";
+import type { GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
 
 import Layout from "@/components/layout/layout";
 import PageHead from "@/components/page-head/page-head";
 import ProductList from "@/components/product-list";
 // Types
-import { Product } from "@/types";
+import type { Product } from "@/types";
 // Helpers
-import {
-  PageComponentProps,
-  getGlobalServerSideProps,
-} from "@/utils/api/api.helpers";
+import type { PageComponentProps } from "@/utils/api/api.helpers";
+import { getGlobalServerSideProps } from "@/utils/api/api.helpers";
 import { getProducts } from "@/utils/api/product.helpers";
 import { parseQuery } from "@/utils/helpers";
 

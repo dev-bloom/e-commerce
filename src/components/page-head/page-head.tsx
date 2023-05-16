@@ -1,10 +1,12 @@
 import Head from "next/head";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-import { Branding } from "@/types";
+import type { Branding } from "@/types";
 
 const appendPageTitle = ({ fields }: Branding, title?: string) => {
-  if (!title) return fields.companyName;
+  if (!title) {
+    return fields.companyName;
+  }
   return `${title} | ${fields.companyName}`;
 };
 

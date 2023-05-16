@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import React from "react";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { getMockProduct } from "@/utils/test.helpers";
 
 import ProductInfo from "./product-info";

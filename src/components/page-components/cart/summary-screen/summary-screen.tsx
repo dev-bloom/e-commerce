@@ -1,9 +1,10 @@
 import { DollarOutlined } from "@ant-design/icons";
 import { Button, List, Divider, Row, Col, Typography, Space } from "antd";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { useSelector } from "react-redux";
 
-import { CartItem, selectCartItems, selectTotalPrice } from "@/store/cart";
+import type { CartItem } from "@/store/cart";
+import { selectCartItems, selectTotalPrice } from "@/store/cart";
 import { discountedPrice } from "@/utils/helpers";
 
 import CartHeader from "../cart-header/cart-header";

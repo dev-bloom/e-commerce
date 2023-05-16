@@ -1,9 +1,10 @@
 import { Card, Space, Tag } from "antd";
 import cn from "classnames";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import type { ReactElement } from "react";
+import React from "react";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { getFirstProductImageURL } from "@/utils/helpers";
 
 import styles from "./product-card.module.scss";

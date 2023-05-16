@@ -1,4 +1,4 @@
-import { ContentFulEntry } from "./global.types";
+import type { ContentFulEntry } from "./global.types";
 
 export type OrderFields = {
   orderId: string;

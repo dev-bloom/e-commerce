@@ -1,6 +1,6 @@
-import { Asset } from "contentful";
+import type { Asset } from "contentful";
 
-import { ContentFulEntry } from "./global.types";
+import type { ContentFulEntry } from "./global.types";
 
 export type BrandingFields = {
   companyName: string;

@@ -4,12 +4,12 @@ import cn from "classnames";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { FC, ReactNode, useEffect, useState } from "react";
-import { PropsWithChildren } from "react";
+import type { FC, ReactNode, PropsWithChildren } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { selectTotalProducts } from "@/store/cart";
-import { Branding } from "@/types";
+import type { Branding } from "@/types";
 import { setColors } from "@/utils/colors";
 import { getImageURLFromAsset } from "@/utils/helpers";
 

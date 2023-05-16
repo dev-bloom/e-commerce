@@ -1,12 +1,12 @@
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { Row, Col, Card, Space, Tag, Button, Select } from "antd";
-import { BaseOptionType } from "antd/es/select";
+import type { BaseOptionType } from "antd/es/select";
 import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 
 import ProductCard from "@/components/product-card";
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { getImageURLFromAsset } from "@/utils/helpers";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";

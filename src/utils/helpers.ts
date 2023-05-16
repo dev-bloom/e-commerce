@@ -1,6 +1,6 @@
-import { Asset, AssetFile } from "contentful";
+import type { Asset, AssetFile } from "contentful";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 
 /**
  * Parse a query string

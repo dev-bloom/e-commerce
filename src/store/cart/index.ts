@@ -6,7 +6,7 @@ import {
   removeItemReducer,
   updateItemQuantityReducer,
 } from "./cart.reducer";
-import { CartState } from "./cart.types";
+import type { CartState } from "./cart.types";
 
 const initialState: CartState = {
   items: [],

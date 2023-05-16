@@ -2,11 +2,9 @@ import { useRouter } from "next/router";
 
 import Layout from "@/components/layout/layout";
 import PageHead from "@/components/page-head/page-head";
-import { Order } from "@/types";
-import {
-  PageComponentProps,
-  getGlobalServerSideProps,
-} from "@/utils/api/api.helpers";
+import type { Order } from "@/types";
+import type { PageComponentProps } from "@/utils/api/api.helpers";
+import { getGlobalServerSideProps } from "@/utils/api/api.helpers";
 import { getOrder } from "@/utils/api/order.helpers";
 
 interface OrderServerSideProps {

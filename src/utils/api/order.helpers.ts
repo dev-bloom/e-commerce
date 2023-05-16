@@ -1,6 +1,6 @@
-import { EntriesQueries } from "contentful";
+import type { EntriesQueries } from "contentful";
 
-import { Order, OrderSkeleton } from "@/types";
+import type { Order, OrderSkeleton } from "@/types";
 
 import contentfulClient from "../contentfulClient";
 

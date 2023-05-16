@@ -1,8 +1,8 @@
 import { hoursToSeconds } from "date-fns";
-import { GetServerSidePropsResult, GetStaticPropsResult } from "next";
-import { FC, PropsWithChildren } from "react";
+import type { GetServerSidePropsResult, GetStaticPropsResult } from "next";
+import type { FC, PropsWithChildren } from "react";
 
-import { Branding } from "@/types";
+import type { Branding } from "@/types";
 
 import { getBranding } from "./branding.helpers";
 

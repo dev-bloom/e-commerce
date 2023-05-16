@@ -1,5 +1,5 @@
 import { Button, Form, Row, Col, Input, Select } from "antd";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 const formItemLayout = {
   labelCol: {

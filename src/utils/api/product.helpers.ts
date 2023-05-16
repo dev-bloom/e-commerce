@@ -1,6 +1,6 @@
-import { Asset, EntriesQueries } from "contentful";
+import type { Asset, EntriesQueries } from "contentful";
 
-import {
+import type {
   FeaturedProducts,
   FeaturedProductsSkeleton,
   Product,

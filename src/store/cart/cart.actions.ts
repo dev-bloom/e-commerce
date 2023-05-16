@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-import { CartItem } from "./cart.types";
+import type { CartItem } from "./cart.types";
 
 export const addItem = createAction<CartItem>("cart/addItem");
 export const removeItem = createAction<string>("cart/removeItem");

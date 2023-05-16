@@ -1,9 +1,10 @@
 import { Input, Typography } from "antd";
 import cn from "classnames";
 import { useRouter } from "next/router";
-import React, { PropsWithChildren, useMemo } from "react";
+import type { PropsWithChildren } from "react";
+import React, { useMemo } from "react";
 
-import { FeaturedProducts } from "@/types";
+import type { FeaturedProducts } from "@/types";
 
 import ProductCard from "../product-card/product-card";
 

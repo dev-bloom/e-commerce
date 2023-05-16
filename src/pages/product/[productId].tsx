@@ -12,11 +12,9 @@ import {
   selectIsProductInCart,
   selectProductCountForSlug,
 } from "@/store/cart";
-import { Product } from "@/types";
-import {
-  PageComponentProps,
-  getGlobalStaticProps,
-} from "@/utils/api/api.helpers";
+import type { Product } from "@/types";
+import type { PageComponentProps } from "@/utils/api/api.helpers";
+import { getGlobalStaticProps } from "@/utils/api/api.helpers";
 import { getProduct, getProducts } from "@/utils/api/product.helpers";
 
 export async function getStaticPaths() {
@@ -71,7 +69,9 @@ const ProductId: ProductIdProps = ({ product, branding }) => {
   };
 
   const onAddToCart = (quantity: number) => {
-    if (!product) return;
+    if (!product) {
+      return;
+    }
     dispatch(
       addItem({
         product,

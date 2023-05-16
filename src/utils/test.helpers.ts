@@ -1,7 +1,8 @@
-import { BLOCKS, Document } from "@contentful/rich-text-types";
-import { Asset, EntrySys, Metadata } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import { BLOCKS } from "@contentful/rich-text-types";
+import type { Asset, EntrySys, Metadata } from "contentful";
 
-import { Branding, BrandingFields, Product, ProductFields } from "@/types";
+import type { Branding, BrandingFields, Product, ProductFields } from "@/types";
 
 import { defaultValueIfUndefined } from "./helpers";
 

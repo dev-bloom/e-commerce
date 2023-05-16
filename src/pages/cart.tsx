@@ -7,10 +7,8 @@ import OrderSuccessScreen from "@/components/page-components/cart/order-success-
 import SummaryScreen from "@/components/page-components/cart/summary-screen";
 import UserScreen from "@/components/page-components/cart/user-screen";
 import PageHead from "@/components/page-head/page-head";
-import {
-  PageComponentProps,
-  getGlobalStaticProps,
-} from "@/utils/api/api.helpers";
+import { getGlobalStaticProps } from "@/utils/api/api.helpers";
+import type { PageComponentProps } from "@/utils/api/api.helpers";
 
 export async function getStaticProps() {
   return getGlobalStaticProps();

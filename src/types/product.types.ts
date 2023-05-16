@@ -1,7 +1,7 @@
-import { Document } from "@contentful/rich-text-types";
-import { Asset } from "contentful";
+import type { Document } from "@contentful/rich-text-types";
+import type { Asset } from "contentful";
 
-import { ContentFulEntry } from "./global.types";
+import type { ContentFulEntry } from "./global.types";
 
 export type ProductFields = {
   name: string;

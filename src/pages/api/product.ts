@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 import { getProduct } from "@/utils/api/product.helpers";
 
 interface ErrorResponse {

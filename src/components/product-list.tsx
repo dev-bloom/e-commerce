@@ -1,7 +1,7 @@
 import { Row, Col } from "antd";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
-import { Product } from "@/types";
+import type { Product } from "@/types";
 
 import ProductCard from "./product-card/product-card";
 

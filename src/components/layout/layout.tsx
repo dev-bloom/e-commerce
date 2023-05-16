@@ -82,7 +82,17 @@ const Layout: FC<PropsWithChildren<LayoutProps>> = ({
 
       {top}
       <ANTDLayout.Content className={cn(styles.layoutBody)}>
-        <div style={{ padding: 24, minHeight: 380 }}>{children}</div>
+        <div
+          style={{
+            padding: 24,
+            minHeight: 380,
+            maxWidth: 1700,
+            margin: "0 auto",
+            // border: "1px solid red",
+          }}
+        >
+          {children}
+        </div>
       </ANTDLayout.Content>
 
       <ANTDLayout.Footer

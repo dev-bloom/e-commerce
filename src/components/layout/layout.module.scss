@@ -1,4 +1,5 @@
 @import "@/styles/mixins";
+@import "@/styles/breakpoints";
 
 .layoutHeader {
   align-items: center;
@@ -14,7 +15,10 @@
 
 .layoutBody {
   min-height: 85vh;
-  padding: 0 50px;
+
+  @include breakpoint($xs-breakpoint) {
+    padding: 0 20px;
+  }
 }
 
 .branding {

@@ -10,6 +10,7 @@ import type { Product } from "@/types";
 import { getImageURLFromAsset } from "@/utils/helpers";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import styles from "./product-info.module.scss";
 
 interface ProductInfoProps {
@@ -50,13 +51,14 @@ const ProductInfo = ({
   return (
     <div className="product-info">
       <Row className={styles.row}>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={24} lg={14} xl={12}>
           <div className={styles.wrapper}>
             <Carousel
               showArrows={true}
               width={"100%"}
               dynamicHeight={true}
               showThumbs={false}
+              className={styles.hola}
             >
               {productFields.gallery?.length
                 ? productFields.gallery?.map((image) => (
@@ -78,7 +80,7 @@ const ProductInfo = ({
             </Carousel>
           </div>
         </Col>
-        <Col span={12}>
+        <Col xs={24} sm={24} md={24} lg={10} xl={12}>
           <div className={styles.wrapper}>
             <Card title={productFields.name} bordered={false}>
               {productBody}

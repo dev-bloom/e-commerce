@@ -1,3 +1,5 @@
+@import "@/styles/breakpoints";
+
 .nav {
   align-items: center;
   border-bottom: 1px solid #eceff1;
@@ -12,11 +14,16 @@
 }
 
 .row {
-  margin-top: 50px;
+  // margin-top: 10px;
+  // border: 1px solid blue;
 }
 
 .wrapper {
   padding: 20px;
+
+  @include breakpoint($xs-breakpoint) {
+    padding: 10px 0;
+  }
 }
 
 .select {
@@ -49,10 +56,30 @@
 
 .carouselImg {
   color: #fff;
-  height: 550px;
+  height: 750px;
   object-fit: cover;
   text-align: center;
   width: 100%;
+
+  @include breakpoint($xs-breakpoint) {
+    height: 350px;
+  }
+
+  @include breakpoint($sm-breakpoint) {
+    height: 450px;
+  }
+
+  @include breakpoint($md-breakpoint) {
+    height: 500px;
+  }
+
+  @include breakpoint($lg-breakpoint) {
+    height: 550px;
+  }
+
+  @include breakpoint($xl-breakpoint) {
+    height: 650px;
+  }
 }
 
 .cardImg {

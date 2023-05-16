@@ -30,7 +30,6 @@ interface UserScreenProps {
 const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
   const user = useSelector(selectUsers);
   const [form] = Form.useForm();
-  const [isFormValid, setIsFormValid] = useState(false);
   const prefixSelector = (
     <Form.Item name="prefix" noStyle>
       <Select style={{ width: 70 }}>
@@ -40,22 +39,11 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
   );
 
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
     onNextStep();
   };
 
-  const handleValidateFields = async () => {
-    try {
-      await form.validateFields();
-      setIsFormValid(false);
-    } catch (error: any) {
-      console.log("error", error);
-      setIsFormValid(true);
-    }
-  };
-
-  const handleFormValuesChange = () => {
-    handleValidateFields();
+  const validateFields = () => {
+    form.validateFields();
   };
 
   return (
@@ -66,7 +54,7 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           {...formItemLayout}
           name="userInfo"
           onFinish={onFinish}
-          onValuesChange={handleFormValuesChange}
+          onSubmitCapture={validateFields}
           initialValues={{
             prefix: "57",
           }}
@@ -137,7 +125,7 @@ const UserScreen = ({ onNextStep }: PropsWithChildren<UserScreenProps>) => {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit" disabled={isFormValid}>
+            <Button type="primary" htmlType="submit">
               Continuar
             </Button>
           </Form.Item>

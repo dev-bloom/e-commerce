@@ -6,9 +6,16 @@ $hero-height: 60vh;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: $hero-height;
   background-color: var(--secondary-color-brighten-60);
   overflow: hidden;
+  @include breakpoint($xs-breakpoint) {
+    flex-direction: column;
+    height: auto;
+  }
+  @include breakpoint($sm-breakpoint) {
+    flex-direction: row;
+    height: $hero-height;
+  }
 }
 
 .section {
@@ -16,25 +23,45 @@ $hero-height: 60vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: $hero-height;
+  @include breakpoint($xs-breakpoint) {
+    height: $hero-height / 4;
+  }
+  @include breakpoint($sm-breakpoint) {
+    height: $hero-height;
+  }
 }
 
 .firstSection {
   background-color: var(--secondary-color-brighten-50);
-  transform: skew(-20deg) scaleX(1.1);
   transform-origin: top left;
   box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.15);
   transition: transform 0.5s ease-in-out;
-  width: 60%;
   overflow: hidden;
+  @include breakpoint($xs-breakpoint) {
+    width: 100%;
+    transform: skew(-15deg);
+    height: $hero-height / 4 * 3;
+  }
+  @include breakpoint($sm-breakpoint) {
+    transform: skew(-20deg) scaleX(1.1);
+    width: 60%;
+    height: $hero-height;
+  }
 }
 
 .firstSectionCorrection {
-  transform: skew(18deg) scaleX(0.9);
   transform-origin: top left;
   display: flex;
   align-items: center;
   flex-direction: column;
+  @include breakpoint($xs-breakpoint) {
+    transform: skew(15deg);
+    width: 100%;
+  }
+  @include breakpoint($sm-breakpoint) {
+    transform: skew(18deg) scaleX(0.9);
+    width: 60%;
+  }
 }
 
 .cardsContainer {
@@ -44,10 +71,10 @@ $hero-height: 60vh;
   width: 100%;
   height: 100%;
   @include breakpoint($xs-breakpoint) {
-    transform: scale(0.2);
+    transform: scale(0.55) translateX(-10%);
   }
   @include breakpoint($sm-breakpoint) {
-    transform: scale(0.4);
+    transform: scale(0.4) translateX(0%);
   }
   @include breakpoint($md-breakpoint) {
     transform: scale(0.6);
@@ -69,10 +96,15 @@ $hero-height: 60vh;
 }
 .secondSection {
   background-color: var(--secondary-color-brighten-60);
-  width: 40%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @include breakpoint($xs-breakpoint) {
+    width: 100%;
+  }
+  @include breakpoint($sm-breakpoint) {
+    width: 40%;
+  }
 }
 
 .input {

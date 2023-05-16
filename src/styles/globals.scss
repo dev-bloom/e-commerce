@@ -1,9 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+/* stylelint-disable selector-class-pattern */
+@import "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap";
 @import "./antd-overrides";
 
 html {
-  width: 100vw;
   overflow-x: hidden;
+  width: 100vw;
 }
 
 body {

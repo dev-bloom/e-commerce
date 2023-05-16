@@ -1,27 +1,28 @@
 @import "@/styles/mixins";
 
 .layoutHeader {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   background-color: white;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
   transition: box-shadow 0.25s ease-in-out;
+  width: 100%;
+  z-index: 10;
 }
 
 .layoutBody {
-  padding: 0 50px;
   min-height: 85vh;
+  padding: 0 50px;
 }
 
 .branding {
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 0.5em;
-  @include impactFont();
+
+  @include impactFont;
 
   img {
     border-radius: 50%;
@@ -29,31 +30,32 @@
 }
 
 .cart {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 0.25em;
-  @include impactFont();
+  justify-content: space-between;
   position: relative;
+
+  @include impactFont;
 }
 
 .cartTotal {
-  position: absolute;
   bottom: -0.5em;
-  right: -0.5em;
-  font-size: large;
   color: var(--tertiary-color-brighten-10);
+  font-size: large;
+  position: absolute;
+  right: -0.5em;
 }
 
 .footer {
   background-color: white;
-  position: sticky;
   bottom: 0;
-  box-shadow: 0 0 0.5em 0.25em rgba(0, 0, 0, 0);
-  transition: box-shadow 0.25s ease-in-out;
+  box-shadow: 0 0 0.5em 0.25em rgb(0 0 0 / 0%);
+  position: sticky;
   text-align: right;
+  transition: box-shadow 0.25s ease-in-out;
 }
 
 .hasScrolled {
-  box-shadow: 0 0 0.5em 0.25em rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 0.5em 0.25em rgb(0 0 0 / 15%);
 }

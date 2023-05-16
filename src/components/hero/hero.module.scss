@@ -2,16 +2,19 @@
 @import "@/styles/breakpoints";
 
 $hero-height: 60vh;
+
 .hero {
-  display: flex;
-  justify-content: space-around;
   align-items: center;
   background-color: var(--secondary-color-brighten-60);
+  display: flex;
+  justify-content: space-around;
   overflow: hidden;
+
   @include breakpoint($xs-breakpoint) {
     flex-direction: column;
     height: auto;
   }
+
   @include breakpoint($sm-breakpoint) {
     flex-direction: row;
     height: $hero-height;
@@ -19,13 +22,15 @@ $hero-height: 60vh;
 }
 
 .section {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+
   @include breakpoint($xs-breakpoint) {
     height: $hero-height / 4;
   }
+
   @include breakpoint($sm-breakpoint) {
     height: $hero-height;
   }
@@ -33,31 +38,35 @@ $hero-height: 60vh;
 
 .firstSection {
   background-color: var(--secondary-color-brighten-50);
-  transform-origin: top left;
-  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.15);
-  transition: transform 0.5s ease-in-out;
+  box-shadow: inset 0 0 10px 0 rgb(0 0 0 / 15%);
   overflow: hidden;
+  transform-origin: top left;
+  transition: transform 0.5s ease-in-out;
+
   @include breakpoint($xs-breakpoint) {
-    width: 100%;
-    transform: skew(-15deg);
     height: $hero-height / 4 * 3;
+    transform: skew(-15deg);
+    width: 100%;
   }
+
   @include breakpoint($sm-breakpoint) {
+    height: $hero-height;
     transform: skew(-20deg) scaleX(1.1);
     width: 60%;
-    height: $hero-height;
   }
 }
 
 .firstSectionCorrection {
-  transform-origin: top left;
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
+  transform-origin: top left;
+
   @include breakpoint($xs-breakpoint) {
     transform: skew(15deg);
     width: 100%;
   }
+
   @include breakpoint($sm-breakpoint) {
     transform: skew(18deg) scaleX(0.9);
     width: 60%;
@@ -65,79 +74,96 @@ $hero-height: 60vh;
 }
 
 .cardsContainer {
-  display: flex;
-  justify-content: space-around;
   align-items: center;
-  width: 100%;
+  display: flex;
   height: 100%;
+  justify-content: space-around;
+  width: 100%;
+
   @include breakpoint($xs-breakpoint) {
     transform: scale(0.55) translateX(-10%);
   }
+
   @include breakpoint($sm-breakpoint) {
     transform: scale(0.4) translateX(0%);
   }
+
   @include breakpoint($md-breakpoint) {
     transform: scale(0.6);
   }
+
   @include breakpoint($lg-breakpoint) {
     transform: scale(0.8);
   }
 }
+
 .card {
   transition: transform 0.3s ease-in-out;
+
   &:nth-child(2) {
-    z-index: 1;
     transform: scale(1.1);
+    z-index: 1;
   }
+
   &:hover {
     transform: scale(1.2);
     z-index: 2;
   }
 }
+
 .secondSection {
+  align-items: center;
   background-color: var(--secondary-color-brighten-60);
   display: flex;
   justify-content: center;
-  align-items: center;
+
   @include breakpoint($xs-breakpoint) {
     width: 100%;
   }
+
   @include breakpoint($sm-breakpoint) {
     width: 40%;
   }
 }
 
 .input {
-  width: 75%;
+  border-bottom: solid 4px var(--secondary-color-brighten-50);
   border-radius: 0;
   border-bottom-right-radius: 4px;
-  border-bottom: solid 4px var(--secondary-color-brighten-50);
   transition: all 0.3s ease-in-out;
+  width: 75%;
+
   button {
     background: var(--secondary-color-brighten-50);
-    border-bottom-right-radius: 0 !important;
     border: none;
+    border-bottom-right-radius: 0 !important;
+
     svg {
       color: var(--secondary-color-brighten-70);
     }
   }
+
   input {
     color: var(--primary-color-brighten-30) !important;
     font-size: large !important;
     font-weight: 600;
   }
+
   &::placeholder {
-    font-weight: bold;
-    text-transform: uppercase;
     color: var(--secondary-color-brighten-40);
     font-size: large;
+    font-weight: bold;
+    text-transform: uppercase;
   }
+
   &:hover,
   &:active,
   &:focus {
     border-bottom: solid 4px var(--secondary-color-brighten-40) !important;
+
     button {
       background: var(--secondary-color-brighten-40);
+
       svg {
         color: var(--secondary-color-brighten-60);
       }
@@ -146,8 +172,9 @@ $hero-height: 60vh;
 }
 
 .title {
-  @include impactFont();
+  @include impactFont;
+
   color: var(--primary-color-brighten-20) !important;
-  margin: 0 !important;
   font-size: 4vw !important;
+  margin: 0 !important;
 }

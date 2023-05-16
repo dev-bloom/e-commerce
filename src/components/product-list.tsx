@@ -14,7 +14,7 @@ export default function ProductList({
         const { fields: productFields } = product;
 
         return (
-          <Col key={productFields.name} span={6}>
+          <Col key={productFields.name} xs={24} sm={12} md={8} lg={6} xl={4} >
             <ProductCard card={product} />
           </Col>
         );
@@ -22,3 +22,5 @@ export default function ProductList({
     </Row>
   );
 }
+
+

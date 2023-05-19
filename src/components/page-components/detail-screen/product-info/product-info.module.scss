@@ -13,11 +13,6 @@
   margin: 10px;
 }
 
-.row {
-  // margin-top: 10px;
-  // border: 1px solid blue;
-}
-
 .wrapper {
   padding: 20px;
 
@@ -43,11 +38,14 @@
   font-weight: bold;
 }
 
-.related {
-  align-items: center;
+.relatedCards {
   display: flex;
   gap: 30px;
-  justify-content: flex-start;
+  padding: 10px 0;
+
+  @include breakpoint($xs-breakpoint) {
+    justify-content: center;
+  }
 }
 
 .dprices {
@@ -62,7 +60,7 @@
   width: 100%;
 
   @include breakpoint($xs-breakpoint) {
-    height: 350px;
+    height: 360px;
   }
 
   @include breakpoint($sm-breakpoint) {
@@ -78,7 +76,7 @@
   }
 
   @include breakpoint($xl-breakpoint) {
-    height: 650px;
+    height: 600px;
   }
 }
 

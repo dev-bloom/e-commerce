@@ -21,6 +21,17 @@
   }
 }
 
+.bodyContainer {
+  padding: 24px;
+  min-height: 380px;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  @include breakpoint($xs-breakpoint) {
+    padding: 10px 0;
+  }
+}
+
 .branding {
   align-items: center;
   display: flex;

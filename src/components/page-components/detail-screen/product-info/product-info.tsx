@@ -51,7 +51,7 @@ const ProductInfo = ({
   return (
     <div className="product-info">
       <Row className={styles.row}>
-        <Col xs={24} sm={24} md={24} lg={14} xl={12}>
+        <Col md={24} lg={13} xl={11}>
           <div className={styles.wrapper}>
             <Carousel
               showArrows={true}
@@ -80,7 +80,7 @@ const ProductInfo = ({
             </Carousel>
           </div>
         </Col>
-        <Col xs={24} sm={24} md={24} lg={10} xl={12}>
+        <Col md={24} lg={11} xl={13}>
           <div className={styles.wrapper}>
             <Card title={productFields.name} bordered={false}>
               {productBody}
@@ -147,13 +147,17 @@ const ProductInfo = ({
         </Col>
       </Row>
       {!!productFields.relatedProducts?.length && (
-        <Row className={styles.related}>
+        <Row>
           <Col span={24}>
             <h2>Productos relacionados</h2>
           </Col>
-          {productFields.relatedProducts.map((card) => (
-            <ProductCard card={card} key={card.fields.slug} />
-          ))}
+          <Col span={24}>
+            <Row className={styles.relatedCards}>
+              {productFields.relatedProducts.map((card) => (
+                <ProductCard card={card} key={card.fields.slug} />
+              ))}
+            </Row>
+          </Col>
         </Row>
       )}
     </div>

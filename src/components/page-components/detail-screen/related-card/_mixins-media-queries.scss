@@ -1,27 +1,27 @@
 // Mixin para pantallas pequeñas
-@mixin small-screen {
-  @media (max-width: 767px) {
+@mixin smallScreen {
+  @media (width <= 767px) {
     @content;
   }
 }
 
 // Mixin para pantallas medianas
-@mixin medium-screen {
-  @media (min-width: 768px) and (max-width: 991px) {
+@mixin mediumScreen {
+  @media (width >= 768px) and (width <= 991px) {
     @content;
   }
 }
 
 // Mixin para pantallas grandes
-@mixin large-screen {
-  @media (min-width: 992px) and (max-width: 1199px) {
+@mixin largeScreen {
+  @media (width >= 992px) and (width <= 1199px) {
     @content;
   }
 }
 
 // Mixin para pantallas extra grandes
-@mixin xlarge-screen {
-  @media (min-width: 1200px) {
+@mixin xLargeScreen {
+  @media (width >= 1200px) {
     @content;
   }
 }

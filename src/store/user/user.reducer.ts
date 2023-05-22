@@ -1,5 +1,6 @@
-import { PayloadAction } from "@reduxjs/toolkit";
-import { User } from "./user.types";
+import type { PayloadAction } from "@reduxjs/toolkit";
+
+import type { User } from "./user.types";
 
 export const setUserReducer = (state: User, action: PayloadAction<User>) => {
   state.name = action.payload.name;

@@ -22,10 +22,10 @@
 }
 
 .bodyContainer {
-  padding: 24px;
-  min-height: 380px;
-  max-width: 1500px;
   margin: 0 auto;
+  max-width: 1500px;
+  min-height: 380px;
+  padding: 24px;
 
   @include breakpoint($xs-breakpoint) {
     padding: 10px 0;

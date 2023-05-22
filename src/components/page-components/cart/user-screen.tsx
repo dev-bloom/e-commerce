@@ -4,24 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { selectUser, setUser } from "@/store/user";
 
-const formItemLayout = {
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 22 },
-  },
-};
-
-const tailFormItemLayout = {
-  wrapperCol: {
-    xs: {
-      offset: 7,
-    },
-    sm: {
-      offset: 8,
-    },
-  },
-};
-
 interface UserScreenProps {
   onNextStep: () => void;
 }

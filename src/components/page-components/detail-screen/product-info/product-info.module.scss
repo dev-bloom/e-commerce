@@ -14,10 +14,10 @@
 }
 
 .wrapper {
-  padding: 20px;
+  padding: 10px 0;
 
-  @include breakpoint($xs-breakpoint) {
-    padding: 10px 0;
+  @include breakpoint($sm-breakpoint) {
+    padding: 20px;
   }
 }
 
@@ -41,10 +41,11 @@
 .relatedCards {
   display: flex;
   gap: 30px;
+  justify-content: center;
   padding: 10px 0;
 
-  @include breakpoint($xs-breakpoint) {
-    justify-content: center;
+  @include breakpoint($sm-breakpoint) {
+    justify-content: flex-start;
   }
 }
 
@@ -54,29 +55,25 @@
 
 .carouselImg {
   color: #fff;
-  height: 750px;
+  height: 350px;
   object-fit: cover;
   text-align: center;
   width: 100%;
 
-  @include breakpoint($xs-breakpoint) {
-    height: 360px;
-  }
-
   @include breakpoint($sm-breakpoint) {
-    height: 450px;
+    height: 400px;
   }
 
   @include breakpoint($md-breakpoint) {
-    height: 500px;
+    height: 450px;
   }
 
   @include breakpoint($lg-breakpoint) {
-    height: 550px;
+    height: 500px;
   }
 
   @include breakpoint($xl-breakpoint) {
-    height: 600px;
+    height: 550px;
   }
 }
 

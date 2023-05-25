@@ -49,17 +49,11 @@ const ProductInfo = ({
   }, [productCount]);
 
   return (
-    <div className="product-info">
-      <Row className={styles.row}>
-        <Col md={24} lg={13} xl={11}>
+    <div>
+      <Row>
+        <Col sm={24} md={13} xl={11}>
           <div className={styles.wrapper}>
-            <Carousel
-              showArrows={true}
-              width={"100%"}
-              dynamicHeight={true}
-              showThumbs={false}
-              className={styles.hola}
-            >
+            <Carousel width={"100%"} showThumbs={false}>
               {productFields.gallery?.length
                 ? productFields.gallery?.map((image) => (
                     <img
@@ -80,7 +74,7 @@ const ProductInfo = ({
             </Carousel>
           </div>
         </Col>
-        <Col md={24} lg={11} xl={13}>
+        <Col sm={24} md={11} xl={13}>
           <div className={styles.wrapper}>
             <Card title={productFields.name} bordered={false}>
               {productBody}

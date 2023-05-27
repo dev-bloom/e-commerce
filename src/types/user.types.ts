@@ -3,9 +3,8 @@ export type User = {
   surname: string;
   email: string;
   address: string;
-  phone: string;
   city: string;
   deparment: string;
-  country: string;
   postalCode: string;
+  phone: string;
 };

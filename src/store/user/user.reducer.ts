@@ -1,11 +1,15 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-import type { User } from "./user.types";
+import type { User } from "../../types/user.types";
 
-export const setUserReducer = (state: User, action: PayloadAction<User>) => {
-  state = {...state, ...payload}
-};
+import { initialState } from ".";
 
 export const clearUserReducer = (state: User) => {
-  state = { ...initialState }
+  state = { ...initialState };
+  return state;
+};
+
+export const setUserReducer = (state: User, action: PayloadAction<User>) => {
+  state = { ...state, ...action.payload };
+  return state;
 };

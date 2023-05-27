@@ -40,7 +40,8 @@
     "prefer-const": "error",
     "no-var": "error",
     "prefer-arrow-callback": "error",
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
   },
   "settings": {
     "react": {

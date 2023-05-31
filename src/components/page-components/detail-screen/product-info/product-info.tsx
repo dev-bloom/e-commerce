@@ -10,6 +10,7 @@ import type { Product } from "@/types";
 import { getImageURLFromAsset } from "@/utils/helpers";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 import styles from "./product-info.module.scss";
 
 interface ProductInfoProps {
@@ -48,16 +49,11 @@ const ProductInfo = ({
   }, [productCount]);
 
   return (
-    <div className="product-info">
-      <Row className={styles.row}>
-        <Col span={12}>
+    <div>
+      <Row>
+        <Col sm={24} md={13} xl={11}>
           <div className={styles.wrapper}>
-            <Carousel
-              showArrows={true}
-              width={"100%"}
-              dynamicHeight={true}
-              showThumbs={false}
-            >
+            <Carousel width={"100%"} showThumbs={false}>
               {productFields.gallery?.length
                 ? productFields.gallery?.map((image) => (
                     <img
@@ -78,7 +74,7 @@ const ProductInfo = ({
             </Carousel>
           </div>
         </Col>
-        <Col span={12}>
+        <Col sm={24} md={11} xl={13}>
           <div className={styles.wrapper}>
             <Card title={productFields.name} bordered={false}>
               {productBody}
@@ -145,13 +141,17 @@ const ProductInfo = ({
         </Col>
       </Row>
       {!!productFields.relatedProducts?.length && (
-        <Row className={styles.related}>
+        <Row>
           <Col span={24}>
             <h2>Productos relacionados</h2>
           </Col>
-          {productFields.relatedProducts.map((card) => (
-            <ProductCard card={card} key={card.fields.slug} />
-          ))}
+          <Col span={24}>
+            <Row className={styles.relatedCards}>
+              {productFields.relatedProducts.map((card) => (
+                <ProductCard card={card} key={card.fields.slug} />
+              ))}
+            </Row>
+          </Col>
         </Row>
       )}
     </div>

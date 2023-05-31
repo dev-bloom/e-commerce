@@ -5,10 +5,12 @@ import { persistReducer } from "redux-persist";
 import thunk from "redux-thunk";
 
 import cart from "./cart";
-import storage from "./storage"; // Default: localStorage if web, AsyncStorage if React Native
+import storage from "./storage";
+import user from "./user";
 
 export const rootReducer = combineReducers({
   cart,
+  user,
 });
 
 const reducer: typeof rootReducer = (state, action) => {

@@ -14,10 +14,10 @@ type OrderProps = PageComponentProps;
 const Order: OrderProps = ({ branding }) => {
   return (
     <Layout branding={branding}>
-    <PageHead branding={branding}></PageHead>
-    <OrderListScreen />
+      <PageHead branding={branding}></PageHead>
+      <OrderListScreen />
     </Layout>
-    );
-}
+  );
+};
 
 export default Order;

@@ -1,6 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Input } from "antd"; 
-
+import { Input } from "antd";
 import { Button } from "antd";
 import { Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -29,7 +28,7 @@ const columns: ColumnsType<DataType> = [
     dataIndex: "product",
     key: "product",
     width: 200,
-    },
+  },
   {
     title: "Quantity",
     dataIndex: "quantity",
@@ -78,19 +77,19 @@ const data = [
 ];
 
 const OrderListScreen = () => {
-  return ( 
+  return (
     <div className={styles.orderListContainer}>
       <Input placeholder="default size" prefix={<UserOutlined />} />
       <br />
       <div className={styles.submitButton}>
-        <Button type="primary" className={styles.buttonPrimary}> 
-          Submit 
+        <Button type="primary" className={styles.buttonPrimary}>
+          Submit
         </Button>
       </div>
       <br />
       <Table columns={columns} dataSource={data} />
     </div>
-  )
-}
+  );
+};
 
 export default OrderListScreen;

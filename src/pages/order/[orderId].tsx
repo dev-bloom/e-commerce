@@ -18,7 +18,6 @@ export const getServerSideProps = async ({
 }) => {
   try {
     const order = await getOrder(orderId);
-
     if (!order) {
       return {
         notFound: true,

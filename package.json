@@ -28,7 +28,7 @@
     "chroma-js": "^2.4.2",
     "classnames": "^2.3.2",
     "contentful": "10.1.0",
-    "eslint": "^8.38.0",
+    "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "lodash": "^4.17.21",
     "next": "13.3.0",
